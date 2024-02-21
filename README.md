@@ -14,3 +14,5 @@ OOP task (spring semester)
 5. Кукишев Никита Антонович
 6. Мальцев Илья Игоревич
 
+Доска: https://tulip-anger-bce.notion.site/9374c3e4192045ec8f5c6a7ce26f6931?v=c6c205309f1d4e748ad1619a2347bef4&pvs=4
+

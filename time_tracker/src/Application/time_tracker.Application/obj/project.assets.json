@@ -128,6 +128,7 @@
         "dependencies": {
           "Itmo.Dev.Editorconfig": "1.0.2",
           "System.Linq.Async": "6.0.1",
+          "time_tracker.Application.Abstractions": "1.0.0",
           "time_tracker.Application.Models": "1.0.0"
         },
         "compile": {

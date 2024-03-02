@@ -1,11 +1,11 @@
-namespace Application.Models.Vacation;
+namespace time_tracker.Application.Models.Vacation;
 
 public enum VacationType
 {
-    Main = "Основной",
-    Additional = "Дополнительный",
-    Academic = "Учебный",
-    Maternity = "Отпуск по беременности и родам",
-    Paretal = "Отпуск по уходу за ребенком",
-    Unpaid = "Неоплачиваемый"         
+    Main,
+    Additional,
+    Academic,
+    Maternity,
+    Parental,
+    Unpaid         
 }

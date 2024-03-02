@@ -1,14 +1,17 @@
-namespace Application.Models.EmployeePosition;
+using time_tracker.Application.Contracts.Department;
+using time_tracker.Application.Contracts.Employee;
 
-public class EmployeePosition
+namespace time_tracker.Application.Models.EmployeePosition;
+
+public class EmployeePositionDto
 {
-    public Guid id { get; set; }
-    public Employee Employee { get; set; }
-    public Position Position { get; set; }
-    public Date StartDate { get; set; }
-    public Date EndDate { get; set; }
-    public string WorkSchedule { get; set; }
-    public float Salary { get; set; }
-    public Department Department { get; set; }
+    public Guid Id { get; set; }
+    public required EmployeeDto Employee { get; set; }
+    public required Position.Position Position { get; set; }
+    public required DateOnly StartDate { get; set; }
+    public required DateOnly EndDate { get; set; }
+    public string? WorkSchedule { get; set; }
+    public float? Salary { get; set; }
+    public required DepartmentDto Department { get; set; }
 
 }

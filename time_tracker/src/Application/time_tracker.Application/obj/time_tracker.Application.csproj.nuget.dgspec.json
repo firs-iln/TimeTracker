@@ -127,6 +127,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "/Users/firs-iln/RiderProjects/time-tracker/time_tracker/src/Application/time_tracker.Application.Abstractions/time_tracker.Application.Abstractions.csproj": {
+                "projectPath": "/Users/firs-iln/RiderProjects/time-tracker/time_tracker/src/Application/time_tracker.Application.Abstractions/time_tracker.Application.Abstractions.csproj"
+              },
               "/Users/firs-iln/RiderProjects/time-tracker/time_tracker/src/Application/time_tracker.Application.Models/time_tracker.Application.Models.csproj": {
                 "projectPath": "/Users/firs-iln/RiderProjects/time-tracker/time_tracker/src/Application/time_tracker.Application.Models/time_tracker.Application.Models.csproj"
               }

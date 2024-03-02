@@ -2,9 +2,9 @@ namespace Application.Models.TaskRecord;
 
 public class TaskRecord
 {
-    public int Id { get; set; }
-    public int Employeeid { get; set; }
-    public int TaskId { get; set; }
+    public Guid Id { get; set; }
+    public Employee Employee { get; set; }
+    public Task Task { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     

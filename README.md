@@ -1,4 +1,4 @@
-# time-tracker
+# TimeTracker
 OOP task (spring semester)
 
 **Тема: Система учета и контроля рабочего времени сотрудников** \

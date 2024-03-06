@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "Qc6QhRBxKUIhqIJm2tTizevI+MbpXeql8WXYL3WsHJi/K2G3XNPgW8/yIMmi9nkSfsYI9RuD9YvaPvc1wbLytw==",
+  "success": true,
+  "projectFilePath": "/Users/firs-iln/RiderProjects/TimeTracker/time_tracker/src/Presentation/time_tracker.Presentation.Http/time_tracker.Presentation.Http.csproj",
+  "expectedPackageFiles": [
+    "/Users/firs-iln/.nuget/packages/itmo.dev.editorconfig/1.0.2/itmo.dev.editorconfig.1.0.2.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/stylecop.analyzers/1.2.0-beta.435/stylecop.analyzers.1.2.0-beta.435.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/stylecop.analyzers.unstable/1.2.0.435/stylecop.analyzers.unstable.1.2.0.435.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/system.linq.async/6.0.1/system.linq.async.6.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "oDBwptni+cX5WQUaqXZWkRtqjmdjcPAxPrusFqoCMQZ/ziGlJKQc4/DmRECYhoCJJ09N3bgLDxbRLzeKZtqd5g==",
+  "success": true,
+  "projectFilePath": "/Users/firs-iln/RiderProjects/TimeTracker/TimeTracker/src/Application/TimeTracker.Application.Contracts/TimeTracker.Application.Contracts.csproj",
+  "expectedPackageFiles": [
+    "/Users/firs-iln/.nuget/packages/itmo.dev.editorconfig/1.0.2/itmo.dev.editorconfig.1.0.2.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/sourcekit/1.1.24/sourcekit.1.1.24.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/sourcekit.analyzers.mustbepartial/1.1.24/sourcekit.analyzers.mustbepartial.1.1.24.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/sourcekit.analyzers.mustbepartial.annotations/1.1.24/sourcekit.analyzers.mustbepartial.annotations.1.1.24.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/sourcekit.generators.builder/1.1.24/sourcekit.generators.builder.1.1.24.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/sourcekit.generators.builder.annotations/1.1.24/sourcekit.generators.builder.annotations.1.1.24.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/stylecop.analyzers/1.2.0-beta.435/stylecop.analyzers.1.2.0-beta.435.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/stylecop.analyzers.unstable/1.2.0.435/stylecop.analyzers.unstable.1.2.0.435.nupkg.sha512",
+    "/Users/firs-iln/.nuget/packages/system.linq.async/6.0.1/system.linq.async.6.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

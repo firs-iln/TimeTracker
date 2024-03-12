@@ -4,7 +4,7 @@ using TimeTracker.Application.Models;
 namespace TimeTracker.Application.Abstractions.Crud;
 
 public interface ICrudRepository<T>
-    where T : Dto
+    where T : Entity
 {
     public Task<T> GetAsync(Guid id);
     public Task<T> CreateAsync(T entity);

@@ -2,9 +2,9 @@ using TimeTracker.Application.Models.User;
 
 namespace TimeTracker.Application.Models.Employee;
 
-public class EmployeeDto : Dto
+public class Employee : Entity
 {
-    public required UserDto User { get; set; }
+    public required User.User User { get; set; }
     public required string FullName { get; set; }
     public required string PassportData { get; set; }
     public required string PhoneNumber { get; set; }

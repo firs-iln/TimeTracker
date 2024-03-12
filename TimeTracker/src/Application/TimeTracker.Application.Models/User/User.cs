@@ -1,10 +1,8 @@
-using TimeTracker.Application.Models;
-
 namespace TimeTracker.Application.Models.User;
 
-public class CreateUserDto : Dto
+public class User : Entity
 {
-    public required string Username{ get; set; }
+    public required string Username { get; set; }
     public required string HashedPassword { get; set; }
     public required UserRole Role { get; set; }
 }

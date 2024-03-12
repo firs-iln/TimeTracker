@@ -4,38 +4,40 @@ using TimeTracker.Application.Abstractions.Crud;
 
 namespace TimeTracker.Application.Contracts.Services;
 
-public abstract class Service<T>(T repository)
-    where T : ICrudRepository<Dto>
+public abstract class Service<TRepository, TEntity>(TRepository repository)
+    where TRepository : ICrudRepository<TEntity>
+    where TEntity : Entity
 {
-    private readonly T _repository = repository;
+    private readonly TRepository _repository = repository;
 
-    public Task<Dto> GetAsync(Guid id)
+    public async Task<TEntity> GetAsync(Guid id)
     {
-        return _repository.GetAsync(id);
+        return await _repository.GetAsync(id);
     }
 
-    public Task<Dto> CreateAsync(Dto entity)
+    public async Task<TEntity> CreateAsync(TEntity entity)
     {
-        return _repository.CreateAsync(entity);
+        return await _repository.CreateAsync(entity);
     }
 
-    public Task<IEnumerable<Dto>> GetAllAsync()
+    public async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        return _repository.GetAllAsync();
+        return await _repository.GetAllAsync();
     }
 
-    public Task<IEnumerable<Dto>> GetByFilterAsync(Expression<Func<Dto, bool>> filter)
+    public async Task<IEnumerable<TEntity>> GetByFilterAsync(Expression<Func<TEntity, bool>> filter)
     {
-        return _repository.GetByFilterAsync(filter);
+        return await _repository.GetByFilterAsync(filter);
     }
 
-    public Task<Dto> UpdateAsync(Guid id, Dto entity)
+    public async Task<TEntity> UpdateAsync(Guid id, TEntity entity)
     {
-        return _repository.UpdateAsync(id, entity);
+        return await _repository.UpdateAsync(id, entity);
     }
 
-    public Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(Guid id)
     {
-        return _repository.DeleteAsync(id);
+        await _repository.DeleteAsync(id);
+        // await Task.Run(() => _repository.DeleteAsync(id));
     }
 }

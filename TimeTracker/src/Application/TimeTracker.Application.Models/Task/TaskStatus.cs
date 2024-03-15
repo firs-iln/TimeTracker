@@ -5,5 +5,5 @@ public enum TaskStatus
     Planned,
     InProgress,
     Completed,
-    Canceled
+    Canceled,
 }

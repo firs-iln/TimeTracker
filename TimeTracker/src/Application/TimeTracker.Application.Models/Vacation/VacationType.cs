@@ -7,5 +7,5 @@ public enum VacationType
     Academic,
     Maternity,
     Parental,
-    Unpaid
+    Unpaid,
 }

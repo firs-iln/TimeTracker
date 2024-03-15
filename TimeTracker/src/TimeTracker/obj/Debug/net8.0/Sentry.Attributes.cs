@@ -10,7 +10,7 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyMetadata("Sentry.ProjectDirectory", "/Users/firs-iln/RiderProjects/TimeTracker/time_tracker/src/TimeTracker/")]
+[assembly: System.Reflection.AssemblyMetadata("Sentry.ProjectDirectory", "C:\\Users\\daria\\RiderProjects\\TimeTracker\\TimeTracker\\src\\TimeTracker\\")]
 
 // Создано классом WriteCodeFragment MSBuild.
 

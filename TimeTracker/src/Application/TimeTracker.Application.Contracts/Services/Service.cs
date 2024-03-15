@@ -1,8 +1,8 @@
-using System.Linq.Expressions;
-using TimeTracker.Application.Models;
-using TimeTracker.Application.Abstractions.Crud;
-
 namespace TimeTracker.Application.Contracts.Services;
+
+using System.Linq.Expressions;
+using TimeTracker.Application.Abstractions.Crud;
+using TimeTracker.Application.Models;
 
 public abstract class Service<TRepository, TEntity>(TRepository repository)
     where TRepository : ICrudRepository<TEntity>
@@ -38,6 +38,7 @@ public abstract class Service<TRepository, TEntity>(TRepository repository)
     public async Task DeleteAsync(Guid id)
     {
         await _repository.DeleteAsync(id);
+
         // await Task.Run(() => _repository.DeleteAsync(id));
     }
 }

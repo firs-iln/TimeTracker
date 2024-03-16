@@ -2,6 +2,9 @@
 
 using Itmo.Dev.Platform.Common.Extensions;
 using Itmo.Dev.Platform.Logging.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using TimeTracker.Application.Extensions;
 using TimeTracker.Infrastructure.Persistence.Extensions;
 using TimeTracker.Presentation.Http.Extensions;

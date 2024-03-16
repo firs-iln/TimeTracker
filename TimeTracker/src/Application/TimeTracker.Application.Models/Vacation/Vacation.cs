@@ -1,3 +1,5 @@
+using System;
+
 namespace TimeTracker.Application.Models.Vacation;
 
 public class Vacation : Entity

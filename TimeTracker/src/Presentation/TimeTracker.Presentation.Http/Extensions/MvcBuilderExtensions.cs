@@ -1,4 +1,6 @@
-﻿namespace TimeTracker.Presentation.Http.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace TimeTracker.Presentation.Http.Extensions;
 
 public static class MvcBuilderExtensions
 {

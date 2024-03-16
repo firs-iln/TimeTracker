@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace TimeTracker.Application.Contracts.Services;
 
 using System.Linq.Expressions;

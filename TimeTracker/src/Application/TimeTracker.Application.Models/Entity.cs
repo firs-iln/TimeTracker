@@ -1,3 +1,5 @@
+using System;
+
 namespace TimeTracker.Application.Models;
 
 public abstract class Entity

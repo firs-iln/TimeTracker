@@ -1,3 +1,5 @@
+using System;
+
 namespace TimeTracker.Application.Models.Task;
 
 public class Task : Entity

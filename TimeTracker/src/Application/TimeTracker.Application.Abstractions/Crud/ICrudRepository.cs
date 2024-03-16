@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace TimeTracker.Application.Abstractions.Crud;
 
 using System.Linq.Expressions;

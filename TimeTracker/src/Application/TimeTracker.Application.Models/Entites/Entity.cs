@@ -1,6 +1,4 @@
-using System;
-
-namespace TimeTracker.Application.Models;
+namespace TimeTracker.Application.Models.Entites;
 
 public abstract class Entity
 {

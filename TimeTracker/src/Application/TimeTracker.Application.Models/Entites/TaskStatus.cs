@@ -1,4 +1,4 @@
-namespace TimeTracker.Application.Models.Task;
+namespace TimeTracker.Application.Models.Entites;
 
 public enum TaskStatus
 {

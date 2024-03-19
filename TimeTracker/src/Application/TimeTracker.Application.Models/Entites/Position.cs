@@ -1,4 +1,4 @@
-namespace TimeTracker.Application.Models.Position;
+namespace TimeTracker.Application.Models.Entites;
 
 public class Position : Entity
 {

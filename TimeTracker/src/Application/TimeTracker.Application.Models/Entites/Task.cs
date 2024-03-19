@@ -1,6 +1,4 @@
-using System;
-
-namespace TimeTracker.Application.Models.Task;
+namespace TimeTracker.Application.Models.Entites;
 
 public class Task : Entity
 {
@@ -10,5 +8,5 @@ public class Task : Entity
 
     public DateTime Deadline { get; set; }
 
-    public required Department.Department Department { get; set; }
+    public required Department Department { get; set; }
 }

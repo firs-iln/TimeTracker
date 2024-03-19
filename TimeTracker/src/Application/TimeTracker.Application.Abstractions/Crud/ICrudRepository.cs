@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace TimeTracker.Application.Abstractions.Crud;
 
 using System.Linq.Expressions;
 using TimeTracker.Application.Models;
+using TimeTracker.Application.Models.Entites;
+using Task = System.Threading.Tasks.Task;
 
 public interface ICrudRepository<T>
     where T : Entity

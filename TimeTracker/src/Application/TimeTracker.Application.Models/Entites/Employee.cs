@@ -1,10 +1,8 @@
-using System;
-
-namespace TimeTracker.Application.Models.Employee;
+namespace TimeTracker.Application.Models.Entites;
 
 public class Employee : Entity
 {
-    public required User.User User { get; set; }
+    public required User User { get; set; }
 
     public required string FullName { get; set; }
 

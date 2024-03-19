@@ -1,4 +1,4 @@
-namespace TimeTracker.Application.Models.User;
+namespace TimeTracker.Application.Models.Entites;
 
 public class User : Entity
 {

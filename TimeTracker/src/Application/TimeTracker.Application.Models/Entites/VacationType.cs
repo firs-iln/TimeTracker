@@ -1,4 +1,4 @@
-namespace TimeTracker.Application.Models.Vacation;
+namespace TimeTracker.Application.Models.Entites;
 
 public enum VacationType
 {

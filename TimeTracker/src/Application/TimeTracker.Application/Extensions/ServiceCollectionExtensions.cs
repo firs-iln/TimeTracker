@@ -1,6 +1,6 @@
-namespace TimeTracker.Application.Extensions;
-
 using Microsoft.Extensions.DependencyInjection;
+
+namespace TimeTracker.Application.Extensions;
 
 public static class ServiceCollectionExtensions
 {

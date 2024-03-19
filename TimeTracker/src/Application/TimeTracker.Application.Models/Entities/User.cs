@@ -1,4 +1,7 @@
-namespace TimeTracker.Application.Models.Entites;
+using TimeTracker.Application.Models.Entities.Abstractions;
+using TimeTracker.Application.Models.Entities.Enums;
+
+namespace TimeTracker.Application.Models.Entities;
 
 public class User : Entity
 {

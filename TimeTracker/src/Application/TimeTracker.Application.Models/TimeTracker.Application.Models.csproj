@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>TimeTracker.Application.Models</RootNamespace>
+    <NoWarn>SA1206;1206;CS1591;SA1600;SA1602;SA1633</NoWarn>
   </PropertyGroup>
 </Project>

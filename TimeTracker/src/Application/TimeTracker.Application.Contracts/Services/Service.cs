@@ -1,10 +1,9 @@
-namespace TimeTracker.Application.Contracts.Services;
-
 using System.Linq.Expressions;
 using TimeTracker.Application.Abstractions.Crud;
-using TimeTracker.Application.Models.Entites;
+using TimeTracker.Application.Models.Entities.Abstractions;
 using Task = System.Threading.Tasks.Task;
 
+namespace TimeTracker.Application.Contracts.Services;
 public abstract class Service<TRepository, TEntity>(TRepository repository)
     where TRepository : ICrudRepository<TEntity>
     where TEntity : Entity

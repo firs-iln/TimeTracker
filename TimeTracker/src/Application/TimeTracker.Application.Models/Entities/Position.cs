@@ -1,4 +1,6 @@
-namespace TimeTracker.Application.Models.Entites;
+using TimeTracker.Application.Models.Entities.Abstractions;
+
+namespace TimeTracker.Application.Models.Entities;
 
 public class Position : Entity
 {

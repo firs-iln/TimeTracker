@@ -6,7 +6,16 @@
 
     <ItemGroup>
         <PackageReference Include="Itmo.Dev.Platform.Postgres"/>
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    </ItemGroup>
+    
+    <PropertyGroup>
+        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633</NoWarn>
+    </PropertyGroup>
 </Project>

@@ -1,10 +1,10 @@
-namespace TimeTracker.Application.Models.Entites;
+using TimeTracker.Application.Models.Entities.Abstractions;
 
-public class TaskRecord : Entity
+namespace TimeTracker.Application.Models.Entities;
+
+public class TimeRecord : Entity
 {
     public required Employee Employee { get; set; }
-
-    public required Entites.Task Task { get; set; }
 
     public DateTime? StartTime { get; set; }
 

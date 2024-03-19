@@ -18,4 +18,8 @@
         </Content>
     </ItemGroup>
 
+    <PropertyGroup>
+        <NoWarn>SA1206;1206;NU1602</NoWarn>
+    </PropertyGroup>
+
 </Project>

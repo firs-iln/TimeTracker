@@ -1,5 +1,4 @@
+using TimeTracker.Application.Abstractions.Persistence;
+
 namespace TimeTracker.Infrastructure.Persistence;
-
-using Application.Abstractions.Persistence;
-
-public class PersistenceContext : IPersistenceContext { }
+public class PersistenceContext : IPersistenceContext;

@@ -1,13 +1,15 @@
-namespace TimeTracker.Infrastructure.Persistence.Plugins;
-
 using Itmo.Dev.Platform.Postgres.Plugins;
 using Npgsql;
 
+namespace TimeTracker.Infrastructure.Persistence.Plugins;
+
 /// <summary>
 ///     Plugin for configuring NpgsqlDataSource's mappings
-///     ie: enums, composite types
+///     ie: enums, composite types...
 /// </summary>
 public class MappingPlugin : IDataSourcePlugin
 {
-    public void Configure(NpgsqlDataSourceBuilder builder) { }
+    public void Configure(NpgsqlDataSourceBuilder builder)
+    {
+    }
 }

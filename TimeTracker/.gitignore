@@ -370,3 +370,5 @@ FodyWeavers.xsd
 **/.DS_Store
 **/obj/
 **/bin/
+
+src/TimeTracker/appsettings.json

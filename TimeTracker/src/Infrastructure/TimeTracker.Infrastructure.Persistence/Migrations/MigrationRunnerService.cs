@@ -14,6 +14,7 @@ public class MigrationRunnerService(IServiceScopeFactory scopeFactory) : Backgro
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         await using AsyncServiceScope scope = scopeFactory.CreateAsyncScope();
+
         await scope.UsePlatformMigrationsAsync(stoppingToken);
     }
 }

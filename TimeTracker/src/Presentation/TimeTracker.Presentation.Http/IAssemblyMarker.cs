@@ -1,3 +1,3 @@
 namespace TimeTracker.Presentation.Http;
 
-internal interface IAssemblyMarker { }
+internal interface IAssemblyMarker;

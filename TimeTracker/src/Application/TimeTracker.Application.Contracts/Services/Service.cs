@@ -1,44 +1,43 @@
 using System.Linq.Expressions;
-using TimeTracker.Application.Abstractions.Crud;
-using TimeTracker.Application.Models.Entities.Abstractions;
+using TimeTracker.Application.Abstractions.Persistence.Repositories;
+using TimeTracker.Application.Models.Abstractions;
 using Task = System.Threading.Tasks.Task;
 
 namespace TimeTracker.Application.Contracts.Services;
-public abstract class Service<TRepository, TEntity>(TRepository repository)
-    where TRepository : ICrudRepository<TEntity>
-    where TEntity : Entity
+public abstract class Service<TRepository, TModel>(TRepository repository) : IService<TModel>
+    where TRepository : ICrudRepository<TModel>
+    where TModel : BaseModel
 {
     private readonly TRepository _repository = repository;
 
-    public async Task<TEntity> GetAsync(Guid id)
+    public async Task<TModel?> GetAsync(Guid id)
     {
         return await _repository.GetAsync(id);
     }
 
-    public async Task<TEntity> CreateAsync(TEntity entity)
+    public async Task<TModel?> CreateAsync(TModel model)
     {
-        return await _repository.CreateAsync(entity);
+        return await _repository.CreateAsync(model);
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync()
+    public async Task<IEnumerable<TModel?>> GetAllAsync()
     {
         return await _repository.GetAllAsync();
     }
 
-    public async Task<IEnumerable<TEntity>> GetByFilterAsync(Expression<Func<TEntity, bool>> filter)
+    public Task<IEnumerable<TModel?>> GetByFilterAsync(Expression<Func<TModel, bool>> filter)
     {
-        return await _repository.GetByFilterAsync(filter);
+        // return await _repository.GetByFilterAsync(filter);
+        throw new NotImplementedException();
     }
 
-    public async Task<TEntity> UpdateAsync(Guid id, TEntity entity)
+    public async Task<TModel?> UpdateAsync(Guid id, TModel model)
     {
-        return await _repository.UpdateAsync(id, entity);
+        return await _repository.UpdateAsync(id, model);
     }
 
-    public async Task DeleteAsync(Guid id)
+    public Task DeleteAsync(Guid id)
     {
-        await _repository.DeleteAsync(id);
-
-        // await Task.Run(() => _repository.DeleteAsync(id));
+        return _repository.DeleteAsync(id);
     }
 }

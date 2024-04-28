@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TimeTracker.Infrastructure.Persistence.Context;
@@ -11,9 +12,11 @@ using TimeTracker.Infrastructure.Persistence.Context;
 namespace TimeTracker.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240428185529_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Auth", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Auth", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +55,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("Auths");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Department", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +81,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Employee", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,7 +122,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.EmployeePosition", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.EmployeePosition", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,7 +166,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("EmployeePositions");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Position", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Position", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,7 +191,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("Positions");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Problem", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Problem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,7 +223,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("Problems");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.ProblemRecord", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.ProblemRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -253,7 +256,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("ProblemRecords");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.User", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,7 +284,7 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Vacation", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Vacation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -312,9 +315,9 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.ToTable("Vacations");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Auth", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Auth", b =>
                 {
-                    b.HasOne("TimeTracker.Application.Entities.Entities.User", "User")
+                    b.HasOne("TimeTracker.Application.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -323,9 +326,9 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Department", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Department", b =>
                 {
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Employee", "Manager")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Employee", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -334,9 +337,9 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Employee", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Employee", b =>
                 {
-                    b.HasOne("TimeTracker.Application.Entities.Entities.User", "User")
+                    b.HasOne("TimeTracker.Application.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -345,21 +348,21 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.EmployeePosition", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.EmployeePosition", b =>
                 {
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Department", "Department")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Employee", "Employee")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Position", "Position")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Position", "Position")
                         .WithMany()
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -372,9 +375,9 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.Navigation("Position");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Problem", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Problem", b =>
                 {
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Department", "Department")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -383,15 +386,15 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.ProblemRecord", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.ProblemRecord", b =>
                 {
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Employee", "Employee")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Problem", "Problem")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Problem", "Problem")
                         .WithMany()
                         .HasForeignKey("ProblemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -402,9 +405,9 @@ namespace TimeTracker.Infrastructure.Persistence.Migrations
                     b.Navigation("Problem");
                 });
 
-            modelBuilder.Entity("TimeTracker.Application.Entities.Entities.Vacation", b =>
+            modelBuilder.Entity("TimeTracker.Application.Models.Entities.Vacation", b =>
                 {
-                    b.HasOne("TimeTracker.Application.Entities.Entities.Employee", "Employee")
+                    b.HasOne("TimeTracker.Application.Models.Entities.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)

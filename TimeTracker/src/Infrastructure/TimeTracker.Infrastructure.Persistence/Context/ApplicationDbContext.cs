@@ -1,17 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using TimeTracker.Application.Models.Entities;
+using TimeTracker.Infrastructure.Persistence.Entities;
 
 namespace TimeTracker.Infrastructure.Persistence.Context;
+
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext()
-    {
-    }
+    public ApplicationDbContext() { }
 
     public ApplicationDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public required DbSet<Auth> Auths { get; set; }
 

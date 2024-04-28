@@ -16,6 +16,6 @@
     </ItemGroup>
     
     <PropertyGroup>
-        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633</NoWarn>
+        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633;SA1413;IDE0005;SA1101;IDE1006;SA1502</NoWarn>
     </PropertyGroup>
 </Project>

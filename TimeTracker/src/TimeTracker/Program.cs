@@ -26,15 +26,16 @@ builder.Services
     .AddNewtonsoftJson()
     .AddPresentationHttp();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Host.AddPlatformSerilog(builder.Configuration);
 builder.Services.AddUtcDateTimeProvider();
 
 WebApplication app = builder.Build();
 
-app.UseRouting();
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseRouting();
 app.MapControllers();
 
 await app.RunAsync();

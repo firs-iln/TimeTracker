@@ -8,4 +8,11 @@
         <Folder Include="Controllers\"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\TimeTracker.Application.Contracts\TimeTracker.Application.Contracts.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633;SA1413;IDE0005;IDE0008;SA1101</NoWarn>
+    </PropertyGroup>
 </Project>

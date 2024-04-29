@@ -4,6 +4,7 @@ using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Application.Models.Abstractions;
 using TimeTracker.Infrastructure.Persistence.Context;
 using TimeTracker.Infrastructure.Persistence.Entities.Abstractions;
+using TimeTracker.Infrastructure.Persistence.Exceptions;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
@@ -47,7 +48,7 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
         TEntity? currentEntity = await DbSet.FindAsync(id);
         if (currentEntity == null)
         {
-            throw new Exception();
+            throw new InvalidIdException<TEntity>(id);
         }
 
         TEntity entityToUpdate = UpdateEntity(currentEntity, model);

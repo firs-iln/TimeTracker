@@ -1,12 +1,15 @@
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Application.Models.Abstractions;
 using Task = System.Threading.Tasks.Task;
 
-namespace TimeTracker.Application.Contracts.Services;
-public abstract class Service<TRepository, TModel>(TRepository repository) : IService<TModel>
-    where TRepository : ICrudRepository<TModel>
+namespace TimeTracker.Application.Contracts.Services.Abstractions;
+public abstract class Service<TRepository, TModel, TCreateDto, TUpdateDto>(TRepository repository) : IService<TModel, TCreateDto, TUpdateDto>
+    where TRepository : ICrudRepository<TModel, TCreateDto, TUpdateDto>
     where TModel : BaseModel
+    where TCreateDto : class
+    where TUpdateDto : class
 {
     private readonly TRepository _repository = repository;
 
@@ -15,7 +18,7 @@ public abstract class Service<TRepository, TModel>(TRepository repository) : ISe
         return await _repository.GetAsync(id);
     }
 
-    public async Task<TModel?> CreateAsync(TModel model)
+    public async Task<TModel?> CreateAsync(TCreateDto model)
     {
         return await _repository.CreateAsync(model);
     }
@@ -31,7 +34,7 @@ public abstract class Service<TRepository, TModel>(TRepository repository) : ISe
         throw new NotImplementedException();
     }
 
-    public async Task<TModel?> UpdateAsync(Guid id, TModel model)
+    public async Task<TModel?> UpdateAsync(Guid id, TUpdateDto model)
     {
         return await _repository.UpdateAsync(id, model);
     }

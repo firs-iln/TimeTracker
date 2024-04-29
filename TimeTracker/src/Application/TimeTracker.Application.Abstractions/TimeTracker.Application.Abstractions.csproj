@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <ProjectReference Include="..\TimeTracker.Application.Models\TimeTracker.Application.Models.csproj" />
+        <ProjectReference Include="..\TimeTracker.Application.Models\TimeTracker.Application.Models.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -9,8 +9,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" /><PackageReference Include="Itmo.Dev.Platform.Postgres" />
-        <PackageReference Include="Itmo.Dev.Platform.Common" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
+        <PackageReference Include="Itmo.Dev.Platform.Postgres"/>
+        <PackageReference Include="Itmo.Dev.Platform.Common"/>
     </ItemGroup>
+
+    <PropertyGroup>
+        <NoWarn>SA1206;SA1600;$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
 
 </Project>

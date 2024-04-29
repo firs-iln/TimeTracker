@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TimeTracker.Application.Contracts.Services;
+using TimeTracker.Application.Abstractions.Persistence.Dto.User;
+using TimeTracker.Application.Contracts.Services.User;
 using TimeTracker.Application.Models;
 
 namespace TimeTracker.Presentation.Http.Controllers;
@@ -28,7 +29,7 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody] User? user)
+    public async Task<IActionResult> CreateAsync([FromBody] UserCreate? user)
     {
         if (user == null)
         {

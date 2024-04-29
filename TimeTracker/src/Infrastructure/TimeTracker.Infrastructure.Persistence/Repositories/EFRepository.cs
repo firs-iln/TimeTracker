@@ -7,9 +7,11 @@ using TimeTracker.Infrastructure.Persistence.Entities.Abstractions;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public abstract class EfRepository<TEntity, TModel>(ApplicationDbContext dbContext) : ICrudRepository<TModel>
+public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(ApplicationDbContext dbContext) : ICrudRepository<TModel, TCreateDto, TUpdateDto>
     where TEntity : BaseEntity
     where TModel : BaseModel
+    where TCreateDto : class
+    where TUpdateDto : class
 {
     protected ApplicationDbContext DbContext { get; } = dbContext;
 
@@ -21,13 +23,13 @@ public abstract class EfRepository<TEntity, TModel>(ApplicationDbContext dbConte
         return entity != null ? MapEntityToModel(entity) : null;
     }
 
-    public async Task<TModel?> CreateAsync(TModel entity)
+    public async Task<TModel?> CreateAsync(TCreateDto model)
     {
-        TEntity entityToCreate = MapModelToEntity(entity);
+        TEntity entityToCreate = MapCreateDtoToEntity(model);
         await DbSet.AddAsync(entityToCreate);
         await DbContext.SaveChangesAsync();
-        entity.Id = entityToCreate.Id;
-        return entity;
+        entityToCreate.Id = entityToCreate.Id;
+        return MapEntityToModel(entityToCreate);
     }
 
     public async Task<IEnumerable<TModel?>> GetAllAsync()
@@ -41,12 +43,18 @@ public abstract class EfRepository<TEntity, TModel>(ApplicationDbContext dbConte
         throw new NotImplementedException();
     }
 
-    public async Task<TModel> UpdateAsync(Guid id, TModel entity)
+    public async Task<TModel> UpdateAsync(Guid id, TUpdateDto model)
     {
-        TEntity entityToUpdate = MapModelToEntity(entity);
+        TEntity? currentEntity = await DbSet.FindAsync(id);
+        if (currentEntity == null)
+        {
+            throw new Exception();
+        }
+
+        TEntity entityToUpdate = UpdateEntity(currentEntity, model);
         DbSet.Update(entityToUpdate);
         await DbContext.SaveChangesAsync();
-        return entity;
+        return MapEntityToModel(entityToUpdate);
     }
 
     public async Task DeleteAsync(Guid id)
@@ -62,4 +70,8 @@ public abstract class EfRepository<TEntity, TModel>(ApplicationDbContext dbConte
     protected abstract TModel MapEntityToModel(TEntity entity);
 
     protected abstract TEntity MapModelToEntity(TModel model);
+
+    protected abstract TEntity MapCreateDtoToEntity(TCreateDto model);
+
+    protected abstract TEntity UpdateEntity(TEntity entity, TUpdateDto model);
 }

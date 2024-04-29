@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TimeTracker.Application.Abstractions.Persistence.Dto.User;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
 using UserEntity = TimeTracker.Infrastructure.Persistence.Entities.User;
@@ -9,7 +10,7 @@ using UserModelRole = TimeTracker.Application.Models.Enums.UserRole;
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
 public class EfUserRepository(ApplicationDbContext dbContext)
-    : EfRepository<UserEntity, UserModel>(dbContext), IUserRepository
+    : EfRepository<UserEntity, UserModel, UserCreate, UserUpdate>(dbContext), IUserRepository
 {
     public async Task<UserModel?> GetByUsernameAsync(string username)
     {
@@ -44,5 +45,24 @@ public class EfUserRepository(ApplicationDbContext dbContext)
             CreatedAt = model.CreatedAt,
             UpdatedAt = model.UpdatedAt
         };
+    }
+
+    protected override UserEntity MapCreateDtoToEntity(UserCreate model)
+    {
+        UserEntityRole role = Enum.Parse<UserEntityRole>(model.Role.ToString());
+        return new UserEntity
+        {
+            Username = model.Username,
+            HashedPassword = model.HashedPassword,
+            Role = role
+        };
+    }
+
+    protected override UserEntity UpdateEntity(UserEntity entity, UserUpdate model)
+    {
+        entity.Role = Enum.Parse<UserEntityRole>(model.Role.ToString() ?? entity.Role.ToString());
+        entity.Username = model.Username ?? entity.Username;
+        entity.HashedPassword = model.HashedPassword ?? entity.HashedPassword;
+        return entity;
     }
 }

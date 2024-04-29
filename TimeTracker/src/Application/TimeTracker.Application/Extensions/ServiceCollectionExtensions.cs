@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using TimeTracker.Application.Contracts.Services;
+using TimeTracker.Application.Contracts.Services.User;
 using TimeTracker.Application.Services;
 
 namespace TimeTracker.Application.Extensions;

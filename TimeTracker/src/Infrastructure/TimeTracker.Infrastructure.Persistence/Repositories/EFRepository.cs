@@ -28,7 +28,6 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
         TEntity entityToCreate = MapCreateDtoToEntity(model);
         await DbSet.AddAsync(entityToCreate);
         await DbContext.SaveChangesAsync();
-        entityToCreate.Id = entityToCreate.Id;
         return MapEntityToModel(entityToCreate);
     }
 

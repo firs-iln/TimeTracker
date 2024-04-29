@@ -5,9 +5,13 @@ namespace TimeTracker.Infrastructure.Persistence.Entities;
 
 public class EmployeePosition : BaseEntity
 {
-    public required Employee Employee { get; set; }
+    public Employee Employee { get; set; } = null!;
 
-    public required Position Position { get; set; }
+    public required Guid EmployeeId { get; set; }
+
+    public Position Position { get; set; } = null!;
+
+    public required Guid PositionId { get; set; }
 
     public required DateOnly StartDate { get; set; }
 
@@ -17,5 +21,7 @@ public class EmployeePosition : BaseEntity
 
     public float? Salary { get; set; }
 
-    public required Department Department { get; set; }
+    public Department Department { get; set; } = null!;
+
+    public required Guid DepartmentId { get; set; }
 }

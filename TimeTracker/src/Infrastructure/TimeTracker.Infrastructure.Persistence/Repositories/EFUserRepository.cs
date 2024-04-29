@@ -32,21 +32,6 @@ public class EfUserRepository(ApplicationDbContext dbContext)
         };
     }
 
-    // ReSharper disable once UnusedMember.Local
-    protected override UserEntity MapModelToEntity(UserModel model)
-    {
-        UserEntityRole role = Enum.Parse<UserEntityRole>(model.Role.ToString());
-        return new UserEntity
-        {
-            Id = model.Id,
-            Username = model.Username,
-            HashedPassword = model.HashedPassword,
-            Role = role,
-            CreatedAt = model.CreatedAt,
-            UpdatedAt = model.UpdatedAt
-        };
-    }
-
     protected override UserEntity MapCreateDtoToEntity(UserCreate model)
     {
         UserEntityRole role = Enum.Parse<UserEntityRole>(model.Role.ToString());

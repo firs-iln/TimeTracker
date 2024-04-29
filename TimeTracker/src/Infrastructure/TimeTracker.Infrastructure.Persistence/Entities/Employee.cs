@@ -4,7 +4,9 @@ namespace TimeTracker.Infrastructure.Persistence.Entities;
 
 public class Employee : BaseEntity
 {
-    public required User User { get; set; }
+    public User User { get; set; } = null!;
+
+    public required Guid UserId { get; set; }
 
     public required string FullName { get; set; }
 

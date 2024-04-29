@@ -8,4 +8,6 @@ public class Department : BaseEntity
     public required string Name { get; set; }
 
     public required Employee Manager { get; set; }
+
+    public required Guid EmployeeId { get; set; }
 }

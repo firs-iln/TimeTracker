@@ -68,8 +68,6 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
 
     protected abstract TModel MapEntityToModel(TEntity entity);
 
-    protected abstract TEntity MapModelToEntity(TModel model);
-
     protected abstract TEntity MapCreateDtoToEntity(TCreateDto model);
 
     protected abstract TEntity UpdateEntity(TEntity entity, TUpdateDto model);

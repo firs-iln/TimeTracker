@@ -1,6 +1,6 @@
 namespace TimeTracker.Infrastructure.Persistence.Entities.Enums;
 
-public enum TaskStatus
+public enum ProblemStatus
 {
     Planned,
     InProgress,

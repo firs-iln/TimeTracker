@@ -4,7 +4,9 @@ namespace TimeTracker.Infrastructure.Persistence.Entities;
 
 public class TimeRecord : BaseEntity
 {
-    public required Employee Employee { get; set; }
+    public Employee Employee { get; set; } = null!;
+
+    public required Guid EmployeeId { get; set; }
 
     public DateTime? StartTime { get; set; }
 

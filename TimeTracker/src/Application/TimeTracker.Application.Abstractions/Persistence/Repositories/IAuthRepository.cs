@@ -1,5 +1,8 @@
-﻿namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
+﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Auth;
+using TimeTracker.Application.Models;
 
-public interface IAuthRepository
+namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
+
+public interface IAuthRepository : ICrudRepository<Auth, AuthCreate, AuthUpdate>
 {
 }

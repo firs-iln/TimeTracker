@@ -1,5 +1,8 @@
-﻿namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
+﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Vacation;
+using TimeTracker.Application.Models;
 
-public interface IVacationRepository
+namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
+
+public interface IVacationRepository : ICrudRepository<Vacation, VacationCreate, VacationUpdate>
 {
 }

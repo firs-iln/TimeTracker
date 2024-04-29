@@ -1,5 +1,8 @@
-﻿namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
+﻿using TimeTracker.Application.Abstractions.Persistence.Dto.EmployeePosition;
+using TimeTracker.Application.Models;
 
-public interface IEmployeePositionRepository
+namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
+
+public interface IEmployeePositionRepository : ICrudRepository<EmployeePosition, EmployeePositionCreate, EmployeePositionUpdate>
 {
 }

@@ -10,23 +10,23 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions options)
         : base(options) { }
 
-    public required DbSet<Auth> Auths { get; set; }
+    public required DbSet<AuthEntity> Auths { get; set; }
 
-    public required DbSet<Department> Departments { get; set; }
+    public required DbSet<DepartmentEntity> Departments { get; set; }
 
-    public required DbSet<Employee> Employees { get; set; }
+    public required DbSet<EmployeeEntity> Employees { get; set; }
 
-    public required DbSet<EmployeePosition> EmployeePositions { get; set; }
+    public required DbSet<EmployeePositionEntity> EmployeePositions { get; set; }
 
-    public required DbSet<Position> Positions { get; set; }
+    public required DbSet<PositionEntity> Positions { get; set; }
 
-    public required DbSet<Problem> Problems { get; set; }
+    public required DbSet<ProblemEntity> Problems { get; set; }
 
-    public required DbSet<ProblemRecord> ProblemRecords { get; set; }
+    public required DbSet<ProblemRecordEntity> ProblemRecords { get; set; }
 
-    public required DbSet<User> Users { get; set; }
+    public required DbSet<UserEntity> Users { get; set; }
 
-    public required DbSet<Vacation> Vacations { get; set; }
+    public required DbSet<VacationEntity> Vacations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -2,7 +2,7 @@
 using TimeTracker.Application.Abstractions.Persistence.Dto.User;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
-using EmployeeEntity = TimeTracker.Infrastructure.Persistence.Entities.Employee;
+using TimeTracker.Infrastructure.Persistence.Entities;
 using EmployeeModel = TimeTracker.Application.Models.Employee;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;

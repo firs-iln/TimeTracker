@@ -2,9 +2,9 @@ using TimeTracker.Infrastructure.Persistence.Entities.Abstractions;
 
 namespace TimeTracker.Infrastructure.Persistence.Entities;
 
-public class TimeRecord : BaseEntity
+public class TimeRecordEntity : BaseEntity
 {
-    public Employee Employee { get; set; } = null!;
+    public EmployeeEntity Employee { get; set; } = null!;
 
     public required Guid EmployeeId { get; set; }
 

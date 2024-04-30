@@ -37,7 +37,7 @@ public abstract class Service<TRepository, TModel, TCreateDto, TUpdateDto>(TRepo
     {
         return await Repository.UpdateAsync(id, model);
     }
-    
+
     public Task DeleteAsync(Guid id)
     {
         return Repository.DeleteAsync(id);

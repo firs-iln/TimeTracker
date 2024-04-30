@@ -3,7 +3,7 @@ using TimeTracker.Infrastructure.Persistence.Entities.Enums;
 
 namespace TimeTracker.Infrastructure.Persistence.Entities;
 
-public class User : BaseEntity
+public class UserEntity : BaseEntity
 {
     public required string Username { get; set; }
 

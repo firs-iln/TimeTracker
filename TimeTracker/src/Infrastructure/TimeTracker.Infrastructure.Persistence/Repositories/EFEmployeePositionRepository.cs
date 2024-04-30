@@ -1,7 +1,7 @@
 ﻿using TimeTracker.Application.Abstractions.Persistence.Dto.EmployeePosition;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
-using EmployeePositionEntity = TimeTracker.Infrastructure.Persistence.Entities.EmployeePosition;
+using TimeTracker.Infrastructure.Persistence.Entities;
 using EmployeePositionModel = TimeTracker.Application.Models.EmployeePosition;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;

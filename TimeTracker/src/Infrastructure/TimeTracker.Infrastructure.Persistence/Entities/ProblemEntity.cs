@@ -3,7 +3,7 @@ using TimeTracker.Infrastructure.Persistence.Entities.Enums;
 
 namespace TimeTracker.Infrastructure.Persistence.Entities;
 
-public class Problem : BaseEntity
+public class ProblemEntity : BaseEntity
 {
     public required string Description { get; set; }
 
@@ -11,7 +11,7 @@ public class Problem : BaseEntity
 
     public DateTime Deadline { get; set; }
 
-    public Department Department { get; set; } = null!;
+    public DepartmentEntity Department { get; set; } = null!;
 
     public required Guid DepartmentId { get; set; }
 }

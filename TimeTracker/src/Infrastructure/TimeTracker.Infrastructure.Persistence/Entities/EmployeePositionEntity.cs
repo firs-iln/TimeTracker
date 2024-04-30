@@ -3,13 +3,13 @@ using TimeTracker.Infrastructure.Persistence.Entities.Enums;
 
 namespace TimeTracker.Infrastructure.Persistence.Entities;
 
-public class EmployeePosition : BaseEntity
+public class EmployeePositionEntity : BaseEntity
 {
-    public Employee Employee { get; set; } = null!;
+    public EmployeeEntity Employee { get; set; } = null!;
 
     public required Guid EmployeeId { get; set; }
 
-    public Position Position { get; set; } = null!;
+    public PositionEntity Position { get; set; } = null!;
 
     public required Guid PositionId { get; set; }
 
@@ -21,7 +21,7 @@ public class EmployeePosition : BaseEntity
 
     public float? Salary { get; set; }
 
-    public Department Department { get; set; } = null!;
+    public DepartmentEntity Department { get; set; } = null!;
 
     public required Guid DepartmentId { get; set; }
 }

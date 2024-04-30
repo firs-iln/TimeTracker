@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TimeTracker.Application.Abstractions.Persistence.Dto.User;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
-using UserEntity = TimeTracker.Infrastructure.Persistence.Entities.User;
+using TimeTracker.Infrastructure.Persistence.Entities;
 using UserEntityRole = TimeTracker.Infrastructure.Persistence.Entities.Enums.UserRole;
 using UserModel = TimeTracker.Application.Models.User;
 using UserModelRole = TimeTracker.Application.Models.Enums.UserRole;

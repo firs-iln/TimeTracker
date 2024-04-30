@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using TimeTracker.Application.Contracts.Services.Auth;
 using TimeTracker.Application.Contracts.Services.User;
 using TimeTracker.Application.Services;
 
@@ -10,6 +11,7 @@ public static class ServiceCollectionExtensions
     {
         // TODO: add services
         collection.AddScoped<IUserService, UserService>();
+        collection.AddScoped<IAuthService, AuthService>();
         return collection;
     }
 }

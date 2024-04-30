@@ -1,7 +1,7 @@
 ﻿using TimeTracker.Application.Abstractions.Persistence.Dto.ProblemRecord;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
-using ProblemRecordEntity = TimeTracker.Infrastructure.Persistence.Entities.ProblemRecord;
+using TimeTracker.Infrastructure.Persistence.Entities;
 using ProblemRecordModel = TimeTracker.Application.Models.ProblemRecord;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;

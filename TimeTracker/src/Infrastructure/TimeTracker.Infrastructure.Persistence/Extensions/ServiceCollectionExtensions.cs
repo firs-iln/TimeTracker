@@ -29,6 +29,7 @@ public static class ServiceCollectionExtensions
         // TODO: add repositories
         collection.AddScoped<IPersistenceContext, PersistenceContext>();
         collection.AddScoped<IUserRepository, EfUserRepository>();
+        collection.AddScoped<IAuthRepository, EfAuthRepository>();
 
         return collection;
     }

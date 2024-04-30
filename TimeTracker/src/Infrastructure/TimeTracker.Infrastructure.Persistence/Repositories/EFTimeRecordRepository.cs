@@ -2,7 +2,7 @@
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Application.Models;
 using TimeTracker.Infrastructure.Persistence.Context;
-using TimeRecordEntity = TimeTracker.Infrastructure.Persistence.Entities.TimeRecord;
+using TimeTracker.Infrastructure.Persistence.Entities;
 using TimeRecordModel = TimeTracker.Application.Models.TimeRecord;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;

@@ -1,7 +1,7 @@
 ﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Department;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
-using DepartmentEntity = TimeTracker.Infrastructure.Persistence.Entities.Department;
+using TimeTracker.Infrastructure.Persistence.Entities;
 using DepartmentModel = TimeTracker.Application.Models.Department;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
@@ -24,7 +24,7 @@ public class EfDepartmentRepository(ApplicationDbContext dbContext)
         return new DepartmentEntity
         {
             Name = model.Name,
-            ManagerId = model.ManagerId, 
+            ManagerId = model.ManagerId
         };
     }
 

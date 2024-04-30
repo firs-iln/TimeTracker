@@ -5,14 +5,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Controllers\"/>
+      <ProjectReference Include="..\..\Application\TimeTracker.Application.Contracts\TimeTracker.Application.Contracts.csproj" />
+      <ProjectReference Include="..\..\Application\TimeTracker.Application\TimeTracker.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\TimeTracker.Application.Contracts\TimeTracker.Application.Contracts.csproj" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
     </ItemGroup>
 
     <PropertyGroup>
-        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633;SA1413;IDE0005;IDE0008;SA1101</NoWarn>
+        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633;SA1413;IDE0005;IDE0008;SA1101;CA1506;</NoWarn>
     </PropertyGroup>
 </Project>

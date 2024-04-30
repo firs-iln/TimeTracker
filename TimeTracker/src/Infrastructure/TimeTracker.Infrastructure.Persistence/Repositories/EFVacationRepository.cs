@@ -1,7 +1,7 @@
 ﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Vacation;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
-using VacationEntity = TimeTracker.Infrastructure.Persistence.Entities.Vacation;
+using TimeTracker.Infrastructure.Persistence.Entities;
 using VacationEntityType = TimeTracker.Infrastructure.Persistence.Entities.Enums.VacationType;
 using VacationModel = TimeTracker.Application.Models.Vacation;
 using VacationModelType = TimeTracker.Application.Models.Enums.VacationType;

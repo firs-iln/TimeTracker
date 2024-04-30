@@ -1,5 +1,6 @@
-﻿namespace TimeTracker.Application.Contracts.Services.EmployeePosition;
+﻿using TimeTracker.Application.Abstractions.Persistence.Dto.EmployeePosition;
+using TimeTracker.Application.Contracts.Services.Abstractions;
 
-public interface IEmployeePositionService
-{
-}
+namespace TimeTracker.Application.Contracts.Services.EmployeePosition;
+
+public interface IEmployeePositionService : IService<Models.EmployeePosition, EmployeePositionCreate, EmployeePositionUpdate>;

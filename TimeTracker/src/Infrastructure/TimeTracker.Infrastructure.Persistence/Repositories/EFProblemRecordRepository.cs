@@ -6,7 +6,7 @@ using ProblemRecordModel = TimeTracker.Application.Models.ProblemRecord;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFProblemRecordRepository(ApplicationDbContext dbContext)
+public class EfProblemRecordRepository(ApplicationDbContext dbContext)
     : EfRepository<ProblemRecordEntity, ProblemRecordModel, ProblemRecordCreate, ProblemRecordUpdate>(dbContext), IProblemRecordRepository
 {
     protected override ProblemRecordModel MapEntityToModel(ProblemRecordEntity entity)

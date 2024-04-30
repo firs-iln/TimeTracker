@@ -7,7 +7,7 @@ using TimeRecordModel = TimeTracker.Application.Models.TimeRecord;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFTimeRecordRepository(ApplicationDbContext dbContext)
+public class EfTimeRecordRepository(ApplicationDbContext dbContext)
     : EfRepository<TimeRecordEntity, TimeRecordModel, TimeRecordCreate, TimeRecordUpdate>(dbContext), ITimeRecordRepository
 {
     protected override TimeRecordModel MapEntityToModel(TimeRecordEntity entity)

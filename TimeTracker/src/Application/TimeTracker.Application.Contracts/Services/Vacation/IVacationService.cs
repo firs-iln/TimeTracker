@@ -1,5 +1,6 @@
-﻿namespace TimeTracker.Application.Contracts.Services.Vacation;
+﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Vacation;
+using TimeTracker.Application.Contracts.Services.Abstractions;
 
-public interface IVacationService
-{
-}
+namespace TimeTracker.Application.Contracts.Services.Vacation;
+
+public interface IVacationService : IService<Models.Vacation, VacationCreate, VacationUpdate>;

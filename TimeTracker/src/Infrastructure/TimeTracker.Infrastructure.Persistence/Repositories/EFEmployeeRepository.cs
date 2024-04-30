@@ -7,7 +7,7 @@ using EmployeeModel = TimeTracker.Application.Models.Employee;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFEmployeeRepository(ApplicationDbContext dbContext)
+public class EfEmployeeRepository(ApplicationDbContext dbContext)
     : EfRepository<EmployeeEntity, EmployeeModel, EmployeeCreate, EmployeeUpdate>(dbContext), IEmployeeRepository
 {
     protected override EmployeeModel MapEntityToModel(EmployeeEntity entity)

@@ -6,7 +6,7 @@ using PositionModel = TimeTracker.Application.Models.Position;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFPositionRepository(ApplicationDbContext dbContext)
+public class EfPositionRepository(ApplicationDbContext dbContext)
     : EfRepository<PositionEntity, PositionModel, PositionCreate, PositionUpdate>(dbContext), IPositionRepository
 {
     protected override PositionModel MapEntityToModel(PositionEntity entity)

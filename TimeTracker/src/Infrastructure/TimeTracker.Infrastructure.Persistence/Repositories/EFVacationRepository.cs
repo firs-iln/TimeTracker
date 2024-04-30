@@ -8,7 +8,7 @@ using VacationModelType = TimeTracker.Application.Models.Enums.VacationType;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFVacationRepository(ApplicationDbContext dbContext)
+public class EfVacationRepository(ApplicationDbContext dbContext)
     : EfRepository<VacationEntity, VacationModel, VacationCreate, VacationUpdate>(dbContext), IVacationRepository
 {
     protected override VacationModel MapEntityToModel(VacationEntity entity)

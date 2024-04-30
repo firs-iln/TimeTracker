@@ -1,5 +1,6 @@
-﻿namespace TimeTracker.Application.Contracts.Services.Problem;
+﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Problem;
+using TimeTracker.Application.Contracts.Services.Abstractions;
 
-public interface IProblemService
-{
-}
+namespace TimeTracker.Application.Contracts.Services.Problem;
+
+public interface IProblemService : IService<Models.Problem, ProblemCreate, ProblemUpdate>;

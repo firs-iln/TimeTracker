@@ -6,7 +6,7 @@ using EmployeePositionModel = TimeTracker.Application.Models.EmployeePosition;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFEmployeePositionRepository(ApplicationDbContext dbContext)
+public class EfEmployeePositionRepository(ApplicationDbContext dbContext)
     : EfRepository<EmployeePositionEntity, EmployeePositionModel, EmployeePositionCreate, EmployeePositionUpdate>(
         dbContext), IEmployeePositionRepository
 {

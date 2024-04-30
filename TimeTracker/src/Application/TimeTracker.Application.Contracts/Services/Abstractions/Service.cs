@@ -10,21 +10,21 @@ public abstract class Service<TRepository, TModel, TCreateDto, TUpdateDto>(TRepo
     where TCreateDto : class
     where TUpdateDto : class
 {
-    private readonly TRepository _repository = repository;
+    protected readonly TRepository Repository = repository;
 
     public async Task<TModel?> GetAsync(Guid id)
     {
-        return await _repository.GetAsync(id);
+        return await Repository.GetAsync(id);
     }
 
     public async Task<TModel?> CreateAsync(TCreateDto model)
     {
-        return await _repository.CreateAsync(model);
+        return await Repository.CreateAsync(model);
     }
 
     public async Task<IEnumerable<TModel?>> GetAllAsync()
     {
-        return await _repository.GetAllAsync();
+        return await Repository.GetAllAsync();
     }
 
     public Task<IEnumerable<TModel?>> GetByFilterAsync(Expression<Func<TModel, bool>> filter)
@@ -35,11 +35,11 @@ public abstract class Service<TRepository, TModel, TCreateDto, TUpdateDto>(TRepo
 
     public async Task<TModel?> UpdateAsync(Guid id, TUpdateDto model)
     {
-        return await _repository.UpdateAsync(id, model);
+        return await Repository.UpdateAsync(id, model);
     }
-
+    
     public Task DeleteAsync(Guid id)
     {
-        return _repository.DeleteAsync(id);
+        return Repository.DeleteAsync(id);
     }
 }

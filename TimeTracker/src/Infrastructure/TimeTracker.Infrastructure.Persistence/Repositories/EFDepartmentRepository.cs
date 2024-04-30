@@ -1,36 +1,36 @@
-﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Auth;
+﻿using TimeTracker.Application.Abstractions.Persistence.Dto.Department;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
 using TimeTracker.Infrastructure.Persistence.Context;
-using AuthEntity = TimeTracker.Infrastructure.Persistence.Entities.Auth;
-using AuthModel = TimeTracker.Application.Models.Auth;
+using DepartmentEntity = TimeTracker.Infrastructure.Persistence.Entities.Department;
+using DepartmentModel = TimeTracker.Application.Models.Department;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFDepartmentRepository(ApplicationDbContext dbContext)
-    : EfRepository<AuthEntity, AuthModel, AuthCreate, AuthUpdate>(dbContext), IAuthRepository
+public class EfDepartmentRepository(ApplicationDbContext dbContext)
+    : EfRepository<DepartmentEntity, DepartmentModel, DepartmentCreate, DepartmentUpdate>(dbContext), IDepartmentRepository
 {
-    protected override AuthModel MapEntityToModel(AuthEntity entity)
+    protected override DepartmentModel MapEntityToModel(DepartmentEntity entity)
     {
-        return new AuthModel
+        return new DepartmentModel
         {
-            UserId = entity.UserId,
-            Refresh = entity.Refresh
+            Id = entity.Id,
+            Name = entity.Name,
+            ManagerId = entity.ManagerId,
         };
     }
 
-    protected override AuthEntity MapCreateDtoToEntity(AuthCreate model)
+    protected override DepartmentEntity MapCreateDtoToEntity(DepartmentCreate model)
     {
-        return new AuthEntity
+        return new DepartmentEntity
         {
-            UserId = model.UserId,
-            Refresh = model.Refresh
+            Name = model.Name,
+            ManagerId = model.ManagerId, 
         };
     }
 
-    protected override AuthEntity UpdateEntity(AuthEntity entity, AuthUpdate model)
+    protected override DepartmentEntity UpdateEntity(DepartmentEntity entity, DepartmentUpdate model)
     {
-        entity.UserId = model.UserId ?? entity.UserId;
-        entity.Refresh = model.Refresh ?? entity.Refresh;
+        entity.Name = model.Name ?? entity.Name;
         return entity;
     }
 }

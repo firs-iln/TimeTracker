@@ -8,7 +8,7 @@ using ProblemModelStatus = TimeTracker.Application.Models.Enums.ProblemStatus;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public class EFProblemRepository(ApplicationDbContext dbContext)
+public class EfProblemRepository(ApplicationDbContext dbContext)
     : EfRepository<ProblemEntity, ProblemModel, ProblemCreate, ProblemUpdate>(dbContext), IProblemRepository
 {
     protected override ProblemModel MapEntityToModel(ProblemEntity entity)

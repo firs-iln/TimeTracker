@@ -30,6 +30,9 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IPersistenceContext, PersistenceContext>();
         collection.AddScoped<IUserRepository, EfUserRepository>();
         collection.AddScoped<IAuthRepository, EfAuthRepository>();
+        collection.AddScoped<IPositionRepository, EfPositionRepository>();
+        collection.AddScoped<IEmployeePositionRepository, EfEmployeePositionRepository>();
+        collection.AddScoped<IEmployeeRepository, EfEmployeeRepository>();
 
         return collection;
     }

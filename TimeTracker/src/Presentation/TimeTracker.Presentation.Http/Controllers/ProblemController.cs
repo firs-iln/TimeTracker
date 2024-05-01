@@ -4,6 +4,8 @@ using TimeTracker.Application.Contracts.Services.Problem;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class ProblemController(IProblemService problemService) : ControllerBase
 {
     [HttpGet("{id:guid}")]
@@ -12,14 +14,14 @@ public class ProblemController(IProblemService problemService) : ControllerBase
         var problem = await problemService.GetAsync(id);
         return Ok(problem);
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
         var problems = await problemService.GetAllAsync();
         return Ok(problems);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] ProblemCreate? problem)
     {
@@ -36,7 +38,7 @@ public class ProblemController(IProblemService problemService) : ControllerBase
 
         return BadRequest();
     }
-    
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] ProblemUpdate? problem)
     {

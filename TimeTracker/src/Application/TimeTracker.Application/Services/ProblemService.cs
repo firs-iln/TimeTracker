@@ -7,7 +7,4 @@ using TimeTracker.Application.Models;
 namespace TimeTracker.Application.Services;
 
 public class ProblemService(IProblemRepository repository) 
-    : Service<IProblemRepository, Problem, ProblemCreate, ProblemUpdate>(repository), IProblemService
-{
-    private readonly IProblemRepository _repository = repository;
-}
+    : Service<IProblemRepository, Problem, ProblemCreate, ProblemUpdate>(repository), IProblemService;

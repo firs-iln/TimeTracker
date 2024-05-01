@@ -4,12 +4,19 @@ using TimeTracker.Application.Contracts.Services.Position;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class PositionController(IPositionService positionService) : ControllerBase
 {
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetAsync(Guid id)
     {
         var position = await positionService.GetAsync(id);
+        if (position is null)
+        {
+            return NotFound();
+        }
+        
         return Ok(position);
     }
 

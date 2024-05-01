@@ -29,6 +29,7 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
         TEntity entityToCreate = MapCreateDtoToEntity(model);
         await DbSet.AddAsync(entityToCreate);
         await DbContext.SaveChangesAsync();
+        await ReloadEntity(entityToCreate);
         return MapEntityToModel(entityToCreate);
     }
 
@@ -54,6 +55,7 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
         TEntity entityToUpdate = UpdateEntity(currentEntity, model);
         DbSet.Update(entityToUpdate);
         await DbContext.SaveChangesAsync();
+        await ReloadEntity(entityToUpdate);
         return MapEntityToModel(entityToUpdate);
     }
 
@@ -65,6 +67,11 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
             DbSet.Remove(entity);
             await DbContext.SaveChangesAsync();
         }
+    }
+
+    protected async Task ReloadEntity(TEntity entity)
+    {
+         await DbContext.Entry(entity).ReloadAsync();
     }
 
     protected abstract TModel MapEntityToModel(TEntity entity);

@@ -7,7 +7,4 @@ using TimeTracker.Application.Models;
 namespace TimeTracker.Application.Services;
 
 public class TimeRecordService(ITimeRecordRepository repository) 
-    : Service<ITimeRecordRepository, TimeRecord, TimeRecordCreate, TimeRecordUpdate>(repository), ITimeRecordService
-{
-    private readonly ITimeRecordRepository _repository = repository;
-}
+    : Service<ITimeRecordRepository, TimeRecord, TimeRecordCreate, TimeRecordUpdate>(repository), ITimeRecordService;

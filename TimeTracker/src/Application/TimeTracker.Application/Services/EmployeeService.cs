@@ -7,7 +7,4 @@ using TimeTracker.Application.Models;
 namespace TimeTracker.Application.Services;
 
 public class EmployeeService(IEmployeeRepository repository) 
-    : Service<IEmployeeRepository, Employee, EmployeeCreate, EmployeeUpdate>(repository), IEmployeeService
-{
-    private readonly IEmployeeRepository _repository = repository;
-}
+    : Service<IEmployeeRepository, Employee, EmployeeCreate, EmployeeUpdate>(repository), IEmployeeService;

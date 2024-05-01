@@ -14,7 +14,7 @@ public class EfEmployeeRepository(ApplicationDbContext dbContext)
     {
         return new EmployeeModel
         {
-            UserId = entity.User.Id,
+            UserId = entity.UserId,
             FullName = entity.FullName,
             PassportData = entity.PassportData,
             PhoneNumber = entity.PhoneNumber,

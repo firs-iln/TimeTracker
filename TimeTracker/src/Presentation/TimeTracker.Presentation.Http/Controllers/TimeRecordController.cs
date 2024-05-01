@@ -4,6 +4,8 @@ using TimeTracker.Application.Contracts.Services.TimeRecord;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class TimeRecordController(ITimeRecordService timeRecordService) : ControllerBase
 {
     [HttpGet("{id:guid}")]
@@ -12,14 +14,14 @@ public class TimeRecordController(ITimeRecordService timeRecordService) : Contro
         var timeRecord = await timeRecordService.GetAsync(id);
         return Ok(timeRecord);
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
         var timeRecords = await timeRecordService.GetAllAsync();
         return Ok(timeRecords);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] TimeRecordCreate? timeRecord)
     {
@@ -36,7 +38,7 @@ public class TimeRecordController(ITimeRecordService timeRecordService) : Contro
 
         return BadRequest();
     }
-    
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] TimeRecordUpdate? timeRecord)
     {

@@ -7,7 +7,4 @@ using TimeTracker.Application.Models;
 namespace TimeTracker.Application.Services;
 
 public class VacationService(IVacationRepository repository) 
-    : Service<IVacationRepository, Vacation, VacationCreate, VacationUpdate>(repository), IVacationService
-{
-    private readonly IVacationRepository _repository = repository;
-}
+    : Service<IVacationRepository, Vacation, VacationCreate, VacationUpdate>(repository), IVacationService;

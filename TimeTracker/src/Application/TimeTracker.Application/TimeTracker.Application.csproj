@@ -10,4 +10,7 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
     </ItemGroup>
 
+    <PropertyGroup>
+        <NoWarn>IDE0008;SA1600;SA1028;SA1633;CS1591;SA1101</NoWarn>
+    </PropertyGroup>
 </Project>

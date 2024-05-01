@@ -4,6 +4,8 @@ using TimeTracker.Application.Contracts.Services.Employee;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class EmployeeController(IEmployeeService employeeService) : ControllerBase
 {
     [HttpGet("{id:guid}")]

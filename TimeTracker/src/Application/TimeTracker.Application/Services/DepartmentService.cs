@@ -7,7 +7,4 @@ using TimeTracker.Application.Models;
 namespace TimeTracker.Application.Services;
 
 public class DepartmentService(IDepartmentRepository repository) 
-    : Service<IDepartmentRepository, Department, DepartmentCreate, DepartmentUpdate>(repository), IDepartmentService
-{
-    private readonly IDepartmentRepository _repository = repository;
-}
+    : Service<IDepartmentRepository, Department, DepartmentCreate, DepartmentUpdate>(repository), IDepartmentService;

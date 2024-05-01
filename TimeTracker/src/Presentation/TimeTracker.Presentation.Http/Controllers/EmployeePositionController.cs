@@ -5,6 +5,8 @@ using TimeTracker.Application.Contracts.Services.EmployeePosition;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class EmployeePositionController(IEmployeePositionService employeePositionService) : ControllerBase
 {
     [HttpGet("{id:guid}")]
@@ -13,14 +15,14 @@ public class EmployeePositionController(IEmployeePositionService employeePositio
         var employeePosition = await employeePositionService.GetAsync(id);
         return Ok(employeePosition);
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
         var employeePositions = await employeePositionService.GetAllAsync();
         return Ok(employeePositions);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] EmployeePositionCreate? employeePosition)
     {
@@ -37,7 +39,7 @@ public class EmployeePositionController(IEmployeePositionService employeePositio
 
         return BadRequest();
     }
-    
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] EmployeePositionUpdate? employeePosition)
     {

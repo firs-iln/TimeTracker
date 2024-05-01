@@ -3,6 +3,4 @@ using TimeTracker.Application.Models;
 
 namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
 
-public interface IProblemRecordRepository : ICrudRepository<ProblemRecord, ProblemRecordCreate, ProblemRecordUpdate>
-{
-}
+public interface IProblemRecordRepository : ICrudRepository<ProblemRecord, ProblemRecordCreate, ProblemRecordUpdate>;

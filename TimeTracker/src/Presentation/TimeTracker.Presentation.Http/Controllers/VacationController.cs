@@ -4,6 +4,8 @@ using TimeTracker.Application.Contracts.Services.Vacation;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class VacationController(IVacationService vacationService) : ControllerBase
 {
     [HttpGet("{id:guid}")]
@@ -36,7 +38,7 @@ public class VacationController(IVacationService vacationService) : ControllerBa
 
         return BadRequest();
     }
-    
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] VacationUpdate? vacation)
     {

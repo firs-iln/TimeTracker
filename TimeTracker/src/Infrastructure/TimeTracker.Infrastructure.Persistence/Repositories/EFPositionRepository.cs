@@ -13,6 +13,7 @@ public class EfPositionRepository(ApplicationDbContext dbContext)
     {
         return new PositionModel
         {
+            Id = entity.Id,
             Title = entity.Title,
             Description = entity.Description
         };

@@ -20,9 +20,6 @@ public class EfEmployeeRepository(ApplicationDbContext dbContext)
             PhoneNumber = entity.PhoneNumber,
             Email = entity.Email,
             DateOfBirth = entity.DateOfBirth,
-            Id = entity.Id,
-            CreatedAt = entity.CreatedAt,
-            UpdatedAt = entity.UpdatedAt
         };
     }
 

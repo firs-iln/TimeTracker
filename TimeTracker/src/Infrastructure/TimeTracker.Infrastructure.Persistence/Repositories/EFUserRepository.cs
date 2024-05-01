@@ -23,12 +23,9 @@ public class EfUserRepository(ApplicationDbContext dbContext)
         UserModelRole role = Enum.Parse<UserModelRole>(entity.Role.ToString());
         return new UserModel
         {
-            Id = entity.Id,
             Username = entity.Username,
             HashedPassword = entity.HashedPassword,
             Role = role,
-            CreatedAt = entity.CreatedAt,
-            UpdatedAt = entity.UpdatedAt
         };
     }
 

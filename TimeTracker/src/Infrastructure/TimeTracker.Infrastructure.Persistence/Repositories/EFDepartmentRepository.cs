@@ -7,13 +7,13 @@ using DepartmentModel = TimeTracker.Application.Models.Department;
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
 public class EfDepartmentRepository(ApplicationDbContext dbContext)
-    : EfRepository<DepartmentEntity, DepartmentModel, DepartmentCreate, DepartmentUpdate>(dbContext), IDepartmentRepository
+    : EfRepository<DepartmentEntity, DepartmentModel, DepartmentCreate, DepartmentUpdate>(dbContext),
+        IDepartmentRepository
 {
     protected override DepartmentModel MapEntityToModel(DepartmentEntity entity)
     {
         return new DepartmentModel
         {
-            Id = entity.Id,
             Name = entity.Name,
             ManagerId = entity.ManagerId,
         };

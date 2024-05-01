@@ -21,7 +21,7 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
     public async Task<TModel?> GetAsync(Guid id)
     {
         TEntity? entity = await DbSet.FindAsync(id);
-        return entity != null ? MapEntityToModel(entity) : null;
+        return entity != null ? MapBaseEntityToModel(entity) : null;
     }
 
     public async Task<TModel?> CreateAsync(TCreateDto model)
@@ -30,18 +30,13 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
         await DbSet.AddAsync(entityToCreate);
         await DbContext.SaveChangesAsync();
         await ReloadEntity(entityToCreate);
-        return MapEntityToModel(entityToCreate);
+        return MapBaseEntityToModel(entityToCreate);
     }
 
     public async Task<IEnumerable<TModel?>> GetAllAsync()
     {
         IEnumerable<TEntity> entities = await DbSet.ToListAsync();
-        return entities.Select(MapEntityToModel);
-    }
-
-    public Task<IEnumerable<TModel?>> GetByFilterAsync(Expression<Func<TModel?, bool>> filter)
-    {
-        throw new NotImplementedException();
+        return entities.Select(MapBaseEntityToModel);
     }
 
     public async Task<TModel> UpdateAsync(Guid id, TUpdateDto model)
@@ -56,7 +51,7 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
         DbSet.Update(entityToUpdate);
         await DbContext.SaveChangesAsync();
         await ReloadEntity(entityToUpdate);
-        return MapEntityToModel(entityToUpdate);
+        return MapBaseEntityToModel(entityToUpdate);
     }
 
     public async Task DeleteAsync(Guid id)
@@ -72,6 +67,15 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
     protected async Task ReloadEntity(TEntity entity)
     {
          await DbContext.Entry(entity).ReloadAsync();
+    }
+
+    protected TModel MapBaseEntityToModel(TEntity entity)
+    {
+        var newModel = MapEntityToModel(entity);
+        newModel.Id = entity.Id;
+        newModel.CreatedAt = entity.CreatedAt;
+        newModel.UpdatedAt = entity.UpdatedAt;
+        return newModel;
     }
 
     protected abstract TModel MapEntityToModel(TEntity entity);

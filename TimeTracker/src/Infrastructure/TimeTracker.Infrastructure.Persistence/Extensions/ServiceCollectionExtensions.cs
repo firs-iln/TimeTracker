@@ -33,6 +33,11 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IPositionRepository, EfPositionRepository>();
         collection.AddScoped<IEmployeePositionRepository, EfEmployeePositionRepository>();
         collection.AddScoped<IEmployeeRepository, EfEmployeeRepository>();
+        collection.AddScoped<IDepartmentRepository, EfDepartmentRepository>();
+        collection.AddScoped<IProblemRecordRepository, EfProblemRecordRepository>();
+        collection.AddScoped<IProblemRepository, EfProblemRepository>();
+        collection.AddScoped<IVacationRepository, EfVacationRepository>();
+        collection.AddScoped<ITimeRecordRepository, EfTimeRecordRepository>();
 
         return collection;
     }

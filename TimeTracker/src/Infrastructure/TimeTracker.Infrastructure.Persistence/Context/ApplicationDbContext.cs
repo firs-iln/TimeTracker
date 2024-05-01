@@ -29,6 +29,8 @@ public class ApplicationDbContext : DbContext
 
     public required DbSet<VacationEntity> Vacations { get; set; }
 
+    public required DbSet<TimeRecordEntity> TimeRecords { get; set; }
+
     public override int SaveChanges()
     {
         AddTimestamps();

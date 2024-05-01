@@ -19,7 +19,7 @@ public class EfVacationRepository(ApplicationDbContext dbContext)
             EmployeeId = entity.EmployeeId,
             Type = vacationType,
             StartDate = entity.StartDate,
-            EndDate = entity.EndDate
+            EndDate = entity.EndDate,
         };
     }
 

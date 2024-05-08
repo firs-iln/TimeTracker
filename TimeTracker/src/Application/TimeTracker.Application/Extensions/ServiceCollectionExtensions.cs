@@ -28,7 +28,7 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IProblemService, ProblemService>();
         collection.AddScoped<IProblemRecordService, ProblemRecordService>();
         collection.AddScoped<IVacationService, VacationService>();
-        
+
         return collection;
     }
 }

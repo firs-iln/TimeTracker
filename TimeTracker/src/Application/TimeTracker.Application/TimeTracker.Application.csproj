@@ -6,11 +6,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
     </ItemGroup>
 
     <PropertyGroup>
-        <NoWarn>IDE0008;SA1600;SA1028;SA1633;CS1591;SA1101</NoWarn>
+        <NoWarn>IDE0008;SA1600;SA1028;SA1633;CS1591;SA1101;IDE1006;CA1051;SA1401;</NoWarn>
     </PropertyGroup>
 </Project>

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
+using TimeTracker.Application.Exceptions;
 using TimeTracker.Application.Models.Abstractions;
 using TimeTracker.Infrastructure.Persistence.Context;
 using TimeTracker.Infrastructure.Persistence.Entities.Abstractions;
@@ -8,7 +9,8 @@ using TimeTracker.Infrastructure.Persistence.Exceptions;
 
 namespace TimeTracker.Infrastructure.Persistence.Repositories;
 
-public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(ApplicationDbContext dbContext) : ICrudRepository<TModel, TCreateDto, TUpdateDto>
+public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(ApplicationDbContext dbContext)
+    : ICrudRepository<TModel, TCreateDto, TUpdateDto>
     where TEntity : BaseEntity
     where TModel : BaseModel
     where TCreateDto : class
@@ -21,7 +23,12 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
     public async Task<TModel?> GetAsync(Guid id)
     {
         TEntity? entity = await DbSet.FindAsync(id);
-        return entity != null ? MapBaseEntityToModel(entity) : null;
+        if (entity is null)
+        {
+            throw new NotFoundByIdException(id, typeof(TEntity));
+        }
+
+        return MapBaseEntityToModel(entity);
     }
 
     public async Task<TModel?> CreateAsync(TCreateDto model)
@@ -44,7 +51,7 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
         TEntity? currentEntity = await DbSet.FindAsync(id);
         if (currentEntity == null)
         {
-            throw new InvalidIdException<TEntity>(id);
+            throw new NotFoundByIdException(id, typeof(TEntity));
         }
 
         TEntity entityToUpdate = UpdateEntity(currentEntity, model);
@@ -57,16 +64,13 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
     public async Task DeleteAsync(Guid id)
     {
         TEntity? entity = await DbSet.FindAsync(id);
-        if (entity != null)
+        if (entity is null)
         {
-            DbSet.Remove(entity);
-            await DbContext.SaveChangesAsync();
+            throw new NotFoundByIdException(id, typeof(TEntity));
         }
-    }
 
-    protected async Task ReloadEntity(TEntity entity)
-    {
-         await DbContext.Entry(entity).ReloadAsync();
+        DbSet.Remove(entity);
+        await DbContext.SaveChangesAsync();
     }
 
     protected TModel MapBaseEntityToModel(TEntity entity)
@@ -83,4 +87,9 @@ public abstract class EfRepository<TEntity, TModel, TCreateDto, TUpdateDto>(Appl
     protected abstract TEntity MapCreateDtoToEntity(TCreateDto model);
 
     protected abstract TEntity UpdateEntity(TEntity entity, TUpdateDto model);
+
+    private async Task ReloadEntity(TEntity entity)
+    {
+        await DbContext.Entry(entity).ReloadAsync();
+    }
 }

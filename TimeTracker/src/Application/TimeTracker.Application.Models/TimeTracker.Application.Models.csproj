@@ -5,6 +5,7 @@
     <NoWarn>SA1206;1206;CS1591;SA1600;SA1602;SA1633</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
   </ItemGroup>
 </Project>

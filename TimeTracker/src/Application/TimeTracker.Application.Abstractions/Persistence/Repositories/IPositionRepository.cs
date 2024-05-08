@@ -3,6 +3,4 @@ using TimeTracker.Application.Models;
 
 namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
 
-public interface IPositionRepository : ICrudRepository<Position, PositionCreate, PositionUpdate>
-{
-}
+public interface IPositionRepository : ICrudRepository<Position, PositionCreate, PositionUpdate>;

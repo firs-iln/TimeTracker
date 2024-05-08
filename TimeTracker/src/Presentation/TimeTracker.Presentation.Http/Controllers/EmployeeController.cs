@@ -1,28 +1,46 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.Employee;
-using TimeTracker.Application.Contracts.Services.Employee;
+using TimeTracker.Application.Events.Commands;
+using TimeTracker.Application.Events.Queries;
+using TimeTracker.Application.Events.Queries.Abstractions;
+using TimeTracker.Application.Exceptions;
+using TimeTracker.Application.Models;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class EmployeeController(IEmployeeService employeeService) : ControllerBase
+public class EmployeeController(IMediator mediator) : ControllerBase
 {
     [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(Employee), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetAsync(Guid id)
     {
-        var employee = await employeeService.GetAsync(id);
-        return Ok(employee);
+        try
+        {
+            var employee = await mediator.Send(new GetOneByIdQuery<Employee>(id));
+            return Ok(employee);
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
     }
-    
+
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<Employee>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync()
     {
-        var employees = await employeeService.GetAllAsync();
+        var employees = await mediator.Send(new GetAllQuery<Employee>());
         return Ok(employees);
     }
-    
+
     [HttpPost]
+    [ProducesResponseType(typeof(Employee), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] EmployeeCreate? employee)
     {
         if (employee == null)
@@ -30,16 +48,21 @@ public class EmployeeController(IEmployeeService employeeService) : ControllerBa
             return BadRequest();
         }
 
-        var createdEmployee = await employeeService.CreateAsync(employee);
-        if (createdEmployee != null)
+        try
         {
-            return CreatedAtAction("Get", new { id = createdEmployee.Id }, createdEmployee);
+            var created = await mediator.Send(new CreateOneCommand<Employee, EmployeeCreate>(employee));
+            return CreatedAtAction("Get", new { id = created.Id }, created);
         }
-
-        return BadRequest();
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
     
     [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(Employee), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] EmployeeUpdate? employee)
     {
         if (employee == null)
@@ -47,12 +70,18 @@ public class EmployeeController(IEmployeeService employeeService) : ControllerBa
             return BadRequest();
         }
 
-        var updatedEmployee = await employeeService.UpdateAsync(id, employee);
-        if (updatedEmployee != null)
+        try
         {
-            return Ok(updatedEmployee);
+            var updated = await mediator.Send(new UpdateOneCommand<Employee, EmployeeUpdate>(id, employee));
+            return Ok(updated);
         }
-
-        return BadRequest();
+        catch (NotFoundByIdException)
+        {
+            return NotFound();
+        }
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
 }

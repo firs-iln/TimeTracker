@@ -1,19 +1,14 @@
+using TimeTracker.Application.Abstractions.Persistence.Repositories.ActionRepositories;
 using TimeTracker.Application.Models.Abstractions;
-using Task = System.Threading.Tasks.Task;
 
 namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
-public interface ICrudRepository<TModel, TCreateDto, TUpdateDto>
+
+public interface ICrudRepository<TModel, in TCreateDto, in TUpdateDto>
+    : IGetByIdRepository<TModel>,
+        IGetAllRepository<TModel>,
+        ICreateRepository<TModel, TCreateDto>,
+        IUpdateRepository<TModel, TUpdateDto>,
+        IDeleteRepository<TModel>
     where TModel : BaseModel
     where TCreateDto : class
-    where TUpdateDto : class
-{
-    public Task<TModel?> GetAsync(Guid id);
-
-    public Task<TModel?> CreateAsync(TCreateDto model);
-
-    public Task<IEnumerable<TModel?>> GetAllAsync();
-
-    public Task<TModel> UpdateAsync(Guid id, TUpdateDto model);
-
-    public Task DeleteAsync(Guid id);
-}
+    where TUpdateDto : class;

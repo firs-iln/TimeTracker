@@ -1,28 +1,46 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.TimeRecord;
-using TimeTracker.Application.Contracts.Services.TimeRecord;
+using TimeTracker.Application.Events.Commands;
+using TimeTracker.Application.Events.Queries;
+using TimeTracker.Application.Events.Queries.Abstractions;
+using TimeTracker.Application.Exceptions;
+using TimeTracker.Application.Models;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TimeRecordController(ITimeRecordService timeRecordService) : ControllerBase
+public class TimeRecordController(IMediator mediator) : ControllerBase
 {
     [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(TimeRecord), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetAsync(Guid id)
     {
-        var timeRecord = await timeRecordService.GetAsync(id);
-        return Ok(timeRecord);
+        try
+        {
+            var timeRecord = await mediator.Send(new GetOneByIdQuery<TimeRecord>(id));
+            return Ok(timeRecord);
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<TimeRecord>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync()
     {
-        var timeRecords = await timeRecordService.GetAllAsync();
+        var timeRecords = await mediator.Send(new GetAllQuery<TimeRecord>());
         return Ok(timeRecords);
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(TimeRecord), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] TimeRecordCreate? timeRecord)
     {
         if (timeRecord == null)
@@ -30,16 +48,21 @@ public class TimeRecordController(ITimeRecordService timeRecordService) : Contro
             return BadRequest();
         }
 
-        var createdTimeRecord = await timeRecordService.CreateAsync(timeRecord);
-        if (createdTimeRecord != null)
+        try
         {
-            return CreatedAtAction("Get", new { id = createdTimeRecord.Id }, createdTimeRecord);
+            var created = await mediator.Send(new CreateOneCommand<TimeRecord, TimeRecordCreate>(timeRecord));
+            return CreatedAtAction("Get", new { id = created.Id }, created);
         }
-
-        return BadRequest();
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
-
+    
     [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(TimeRecord), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] TimeRecordUpdate? timeRecord)
     {
         if (timeRecord == null)
@@ -47,12 +70,18 @@ public class TimeRecordController(ITimeRecordService timeRecordService) : Contro
             return BadRequest();
         }
 
-        var updatedTimeRecord = await timeRecordService.UpdateAsync(id, timeRecord);
-        if (updatedTimeRecord != null)
+        try
         {
-            return Ok(updatedTimeRecord);
+            var updated = await mediator.Send(new UpdateOneCommand<TimeRecord, TimeRecordUpdate>(id, timeRecord));
+            return Ok(updated);
         }
-
-        return BadRequest();
+        catch (NotFoundByIdException)
+        {
+            return NotFound();
+        }
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
 }

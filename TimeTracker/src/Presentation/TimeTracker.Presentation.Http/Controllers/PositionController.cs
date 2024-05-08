@@ -1,33 +1,46 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.Position;
-using TimeTracker.Application.Contracts.Services.Position;
+using TimeTracker.Application.Events.Commands;
+using TimeTracker.Application.Events.Queries;
+using TimeTracker.Application.Events.Queries.Abstractions;
+using TimeTracker.Application.Exceptions;
+using TimeTracker.Application.Models;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PositionController(IPositionService positionService) : ControllerBase
+public class PositionController(IMediator mediator) : ControllerBase
 {
     [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(Position), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetAsync(Guid id)
     {
-        var position = await positionService.GetAsync(id);
-        if (position is null)
+        try
+        {
+            var position = await mediator.Send(new GetOneByIdQuery<Position>(id));
+            return Ok(position);
+        }
+        catch (NotFoundException)
         {
             return NotFound();
         }
-        
-        return Ok(position);
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<Position>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync()
     {
-        var positions = await positionService.GetAllAsync();
+        var positions = await mediator.Send(new GetAllQuery<Position>());
         return Ok(positions);
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(Position), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] PositionCreate? position)
     {
         if (position == null)
@@ -35,16 +48,21 @@ public class PositionController(IPositionService positionService) : ControllerBa
             return BadRequest();
         }
 
-        var createdPosition = await positionService.CreateAsync(position);
-        if (createdPosition != null)
+        try
         {
-            return CreatedAtAction("Get", new { id = createdPosition.Id }, createdPosition);
+            var created = await mediator.Send(new CreateOneCommand<Position, PositionCreate>(position));
+            return CreatedAtAction("Get", new { id = created.Id }, created);
         }
-
-        return BadRequest();
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
     
     [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(Position), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] PositionUpdate? position)
     {
         if (position == null)
@@ -52,12 +70,18 @@ public class PositionController(IPositionService positionService) : ControllerBa
             return BadRequest();
         }
 
-        var updatedPosition = await positionService.UpdateAsync(id, position);
-        if (updatedPosition != null)
+        try
         {
-            return Ok(updatedPosition);
+            var updated = await mediator.Send(new UpdateOneCommand<Position, PositionUpdate>(id, position));
+            return Ok(updated);
         }
-
-        return BadRequest();
+        catch (NotFoundByIdException)
+        {
+            return NotFound();
+        }
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
 }

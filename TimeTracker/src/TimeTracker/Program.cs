@@ -6,6 +6,7 @@ using Itmo.Dev.Platform.Common.Extensions;
 using Itmo.Dev.Platform.Logging.Extensions;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using TimeTracker.Application.Events;
 using TimeTracker.Application.Extensions;
 using TimeTracker.Infrastructure.Persistence.Extensions;
 using TimeTracker.Presentation.Http.Extensions;
@@ -17,16 +18,18 @@ builder.Configuration.AddUserSecrets<Program>();
 builder.Services.AddOptions<JsonSerializerSettings>();
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<JsonSerializerSettings>>().Value);
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IAssemblyMarker).Assembly));
+
 builder.Services.AddSwaggerGen().AddEndpointsApiExplorer();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructurePersistence(builder.Configuration);
 
 /*
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
-//         options => builder.Configuration.Bind("JwtSettings", options))
-//     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-//         options => builder.Configuration.Bind("CookieSettings", options));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+        options => builder.Configuration.Bind("JwtSettings", options))
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+        options => builder.Configuration.Bind("CookieSettings", options));
 */
 
 builder.Services

@@ -1,37 +1,54 @@
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Runtime.CompilerServices;
 using TimeTracker.Application.Abstractions.Persistence.Dto.User;
-using TimeTracker.Application.Contracts.Services.User;
+using TimeTracker.Application.Events.Commands;
+using TimeTracker.Application.Events.Queries;
+using TimeTracker.Application.Events.Queries.Abstractions;
+using TimeTracker.Application.Exceptions;
 using TimeTracker.Application.Models;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController(IUserService userService) : ControllerBase
+public class UserController(IMediator mediator) : ControllerBase
 {
     [HttpGet("{username}")]
+    [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetByUsernameAsync(string username)
     {
-        var user = await userService.GetByUsernameAsync(username);
-        if (user == null)
+        try
+        {
+            var user = await mediator.Send(new GetOneByUsernameQuery<User>(username));
+            return Ok(user);
+        }
+        catch (NotFoundException)
         {
             return NotFound();
         }
-
-        return Ok(user);
     }
 
     [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetAsync(Guid id)
     {
-        var user = await userService.GetAsync(id);
-        return Ok(user);
+        try
+        {
+            var user = await mediator.Send(new GetOneByIdQuery<User>(id));
+            return Ok(user);
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(User), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] UserCreate? user)
     {
         if (user == null)
@@ -39,16 +56,21 @@ public class UserController(IUserService userService) : ControllerBase
             return BadRequest();
         }
 
-        var createdUser = await userService.CreateAsync(user);
-        if (createdUser != null)
+        try
         {
+            var createdUser = await mediator.Send(new CreateOneCommand<User, UserCreate>(user));
             return CreatedAtAction("Get", new { id = createdUser.Id }, createdUser);
         }
-
-        return BadRequest();
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
     
     [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UserUpdate? user)
     {
         if (user == null)
@@ -56,20 +78,26 @@ public class UserController(IUserService userService) : ControllerBase
             return BadRequest();
         }
 
-        var updatedUser = await userService.UpdateAsync(id, user);
-        if (updatedUser != null)
+        try
         {
+            var updatedUser = await mediator.Send(new UpdateOneCommand<User, UserUpdate>(id, user));
             return Ok(updatedUser);
         }
-
-        return BadRequest();
+        catch (NotFoundByIdException)
+        {
+            return NotFound();
+        }
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
     
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<User>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync()
     {
-        var users = await userService.GetAllAsync();
+        var users = await mediator.Send(new GetAllQuery<User>());
         return Ok(users);
     }
 }

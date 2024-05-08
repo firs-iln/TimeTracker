@@ -1,9 +1,11 @@
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
+using TimeTracker.Application.Contracts.Services.Abstractions;
 using TimeTracker.Application.Models.Abstractions;
-using Task = System.Threading.Tasks.Task;
 
-namespace TimeTracker.Application.Contracts.Services.Abstractions;
-public abstract class Service<TRepository, TModel, TCreateDto, TUpdateDto>(TRepository repository) : IService<TModel, TCreateDto, TUpdateDto>
+namespace TimeTracker.Application.Services.Abstractions;
+
+public class Service<TRepository, TModel, TCreateDto, TUpdateDto>(TRepository repository)
+    : IService<TModel, TCreateDto, TUpdateDto>
     where TRepository : ICrudRepository<TModel, TCreateDto, TUpdateDto>
     where TModel : BaseModel
     where TCreateDto : class

@@ -15,7 +15,7 @@ public class EfUserRepository(ApplicationDbContext dbContext)
     public async Task<UserModel?> GetByUsernameAsync(string username)
     {
         UserEntity? entity = await DbSet.FirstOrDefaultAsync(user => user.Username == username);
-        return entity != null ? MapEntityToModel(entity) : null;
+        return entity != null ? MapBaseEntityToModel(entity) : null;
     }
 
     protected override UserModel MapEntityToModel(UserEntity entity)

@@ -2,6 +2,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Application\TimeTracker.Application.Abstractions\TimeTracker.Application.Abstractions.csproj" />
+        <ProjectReference Include="..\..\Application\TimeTracker.Application\TimeTracker.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -9,6 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />

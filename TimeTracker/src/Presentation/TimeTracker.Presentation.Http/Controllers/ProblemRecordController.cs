@@ -1,28 +1,46 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.ProblemRecord;
-using TimeTracker.Application.Contracts.Services.ProblemRecord;
+using TimeTracker.Application.Events.Commands;
+using TimeTracker.Application.Events.Queries;
+using TimeTracker.Application.Events.Queries.Abstractions;
+using TimeTracker.Application.Exceptions;
+using TimeTracker.Application.Models;
 
 namespace TimeTracker.Presentation.Http.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ProblemRecordController(IProblemRecordService problemRecordService) : ControllerBase
+public class ProblemRecordController(IMediator mediator) : ControllerBase
 {
     [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(ProblemRecord), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetAsync(Guid id)
     {
-        var problemRecord = await problemRecordService.GetAsync(id);
-        return Ok(problemRecord);
+        try
+        {
+            var problemRecord = await mediator.Send(new GetOneByIdQuery<ProblemRecord>(id));
+            return Ok(problemRecord);
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ProblemRecord>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync()
     {
-        var problemRecords = await problemRecordService.GetAllAsync();
+        var problemRecords = await mediator.Send(new GetAllQuery<ProblemRecord>());
         return Ok(problemRecords);
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(ProblemRecord), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] ProblemRecordCreate? problemRecord)
     {
         if (problemRecord == null)
@@ -30,16 +48,21 @@ public class ProblemRecordController(IProblemRecordService problemRecordService)
             return BadRequest();
         }
 
-        var createdProblemRecord = await problemRecordService.CreateAsync(problemRecord);
-        if (createdProblemRecord != null)
+        try
         {
-            return CreatedAtAction("Get", new { id = createdProblemRecord.Id }, createdProblemRecord);
+            var created = await mediator.Send(new CreateOneCommand<ProblemRecord, ProblemRecordCreate>(problemRecord));
+            return CreatedAtAction("Get", new { id = created.Id }, created);
         }
-
-        return BadRequest();
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
-
+    
     [HttpPut("{id:guid}")]
+    [ProducesResponseType(typeof(ProblemRecord), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] ProblemRecordUpdate? problemRecord)
     {
         if (problemRecord == null)
@@ -47,12 +70,18 @@ public class ProblemRecordController(IProblemRecordService problemRecordService)
             return BadRequest();
         }
 
-        var updatedProblemRecord = await problemRecordService.UpdateAsync(id, problemRecord);
-        if (updatedProblemRecord != null)
+        try
         {
-            return Ok(updatedProblemRecord);
+            var updated = await mediator.Send(new UpdateOneCommand<ProblemRecord, ProblemRecordUpdate>(id, problemRecord));
+            return Ok(updated);
         }
-
-        return BadRequest();
+        catch (NotFoundByIdException)
+        {
+            return NotFound();
+        }
+        catch (UnprocessableEntityException)
+        {
+            return BadRequest();
+        }
     }
 }

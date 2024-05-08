@@ -3,6 +3,4 @@ using TimeTracker.Application.Models;
 
 namespace TimeTracker.Application.Abstractions.Persistence.Repositories;
 
-public interface IEmployeeRepository : ICrudRepository<Employee, EmployeeCreate, EmployeeUpdate>
-{
-}
+public interface IEmployeeRepository : ICrudRepository<Employee, EmployeeCreate, EmployeeUpdate>;

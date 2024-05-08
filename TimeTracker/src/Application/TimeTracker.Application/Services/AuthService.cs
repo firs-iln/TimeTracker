@@ -1,9 +1,9 @@
 using TimeTracker.Application.Abstractions.Persistence.Dto.Auth;
 using TimeTracker.Application.Abstractions.Persistence.Repositories;
-using TimeTracker.Application.Contracts.Services.Abstractions;
 using TimeTracker.Application.Contracts.Services.Auth;
 using TimeTracker.Application.Exceptions;
 using TimeTracker.Application.Models;
+using TimeTracker.Application.Services.Abstractions;
 
 namespace TimeTracker.Application.Services;
 

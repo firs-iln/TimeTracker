@@ -3,6 +3,7 @@ using Itmo.Dev.Platform.Postgres.Plugins;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TimeTracker.Application.Abstractions.Persistence;
 using TimeTracker.Application.Abstractions.Persistence.Dto.Department;
 using TimeTracker.Application.Abstractions.Persistence.Dto.Employee;

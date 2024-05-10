@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TimeTracker.Infrastructure.Persistence.Entities;
 using TimeTracker.Infrastructure.Persistence.Entities.Abstractions;
 

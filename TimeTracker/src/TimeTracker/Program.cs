@@ -6,6 +6,7 @@ using Itmo.Dev.Platform.Common.Extensions;
 using Itmo.Dev.Platform.Logging.Extensions;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Serilog;
 using TimeTracker.Application.Events;
 using TimeTracker.Application.Extensions;
 using TimeTracker.Infrastructure.Persistence.Extensions;
@@ -23,6 +24,15 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IAsse
 builder.Services.AddSwaggerGen().AddEndpointsApiExplorer();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructurePersistence(builder.Configuration);
+
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .MinimumLevel.Information()
+    .CreateLogger();
+
+builder.Logging.AddSerilog(Log.Logger);
+builder.Logging.SetMinimumLevel(LogLevel.Information);
 
 /*
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -50,5 +60,7 @@ app.UseRouting();
 
 // app.UseAuthorization();
 app.MapControllers();
+
+app.UseLoggingMiddleware();
 
 await app.RunAsync();

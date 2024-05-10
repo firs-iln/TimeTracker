@@ -12,6 +12,8 @@
     <ItemGroup>
       <PackageReference Include="MediatR" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+      <PackageReference Include="Request.Body.Peeker" />
+      <PackageReference Include="Serilog.Sinks.File" />
     </ItemGroup>
 
     <PropertyGroup>

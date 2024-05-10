@@ -8,6 +8,7 @@
     <ItemGroup>
       <PackageReference Include="MediatR" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+      <PackageReference Include="Serilog.Sinks.File" />
     </ItemGroup>
     
     <PropertyGroup><NoWarn>CA1051;SA1600;SA1401;CS1591;SA1101;SA1206;SA1633;IDE1006</NoWarn></PropertyGroup>

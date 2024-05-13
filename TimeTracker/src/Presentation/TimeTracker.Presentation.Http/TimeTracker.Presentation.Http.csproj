@@ -14,9 +14,10 @@
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
       <PackageReference Include="Request.Body.Peeker" />
       <PackageReference Include="Serilog.Sinks.File" />
+      <PackageReference Include="Swashbuckle.AspNetCore" />
     </ItemGroup>
 
     <PropertyGroup>
-        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633;SA1413;IDE0005;IDE0008;SA1101;CA1506;SA1028;SA1309</NoWarn>
+        <NoWarn>NU1604;SA1206;1206;CS1591;SA1600;SA1602;SA1633;SA1413;IDE0005;IDE0008;SA1101;CA1506;SA1028;SA1309;CA1825;SA1111;SA1009</NoWarn>
     </PropertyGroup>
 </Project>

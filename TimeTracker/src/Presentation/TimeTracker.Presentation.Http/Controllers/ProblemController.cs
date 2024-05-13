@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.Problem;
@@ -17,6 +18,7 @@ public class ProblemController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(Problem), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [Authorize]
     public async Task<IActionResult> GetAsync(Guid id)
     {
         try
@@ -32,6 +34,7 @@ public class ProblemController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<Problem>), (int)HttpStatusCode.OK)]
+    [Authorize]
     public async Task<IActionResult> GetAllAsync()
     {
         var problems = await mediator.Send(new GetAllQuery<Problem>());
@@ -41,6 +44,7 @@ public class ProblemController(IMediator mediator) : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(Problem), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [Authorize]
     public async Task<IActionResult> CreateAsync([FromBody] ProblemCreate? problem)
     {
         if (problem == null)
@@ -63,6 +67,7 @@ public class ProblemController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(Problem), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [Authorize]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] ProblemUpdate? problem)
     {
         if (problem == null)

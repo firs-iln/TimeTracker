@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.EmployeePosition;
@@ -17,6 +18,7 @@ public class EmployeePositionController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(EmployeePosition), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [Authorize]
     public async Task<IActionResult> GetAsync(Guid id)
     {
         try
@@ -32,6 +34,7 @@ public class EmployeePositionController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<EmployeePosition>), (int)HttpStatusCode.OK)]
+    [Authorize]
     public async Task<IActionResult> GetAllAsync()
     {
         var employeePositions = await mediator.Send(new GetAllQuery<EmployeePosition>());
@@ -41,6 +44,7 @@ public class EmployeePositionController(IMediator mediator) : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(EmployeePosition), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [Authorize]
     public async Task<IActionResult> CreateAsync([FromBody] EmployeePositionCreate? employeePosition)
     {
         if (employeePosition == null)
@@ -63,6 +67,7 @@ public class EmployeePositionController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(EmployeePosition), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [Authorize]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] EmployeePositionUpdate? employeePosition)
     {
         if (employeePosition == null)

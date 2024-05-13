@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.TimeRecord;
@@ -17,6 +18,7 @@ public class TimeRecordController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(TimeRecord), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [Authorize]
     public async Task<IActionResult> GetAsync(Guid id)
     {
         try
@@ -32,6 +34,7 @@ public class TimeRecordController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<TimeRecord>), (int)HttpStatusCode.OK)]
+    [Authorize]
     public async Task<IActionResult> GetAllAsync()
     {
         var timeRecords = await mediator.Send(new GetAllQuery<TimeRecord>());
@@ -41,6 +44,7 @@ public class TimeRecordController(IMediator mediator) : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(TimeRecord), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [Authorize]
     public async Task<IActionResult> CreateAsync([FromBody] TimeRecordCreate? timeRecord)
     {
         if (timeRecord == null)
@@ -63,6 +67,7 @@ public class TimeRecordController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(TimeRecord), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [Authorize]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] TimeRecordUpdate? timeRecord)
     {
         if (timeRecord == null)

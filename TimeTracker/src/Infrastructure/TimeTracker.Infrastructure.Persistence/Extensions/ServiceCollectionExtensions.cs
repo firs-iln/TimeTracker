@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TimeTracker.Application.Abstractions.Persistence;
+using TimeTracker.Application.Abstractions.Persistence.Dto.Auth;
 using TimeTracker.Application.Abstractions.Persistence.Dto.Department;
 using TimeTracker.Application.Abstractions.Persistence.Dto.Employee;
 using TimeTracker.Application.Abstractions.Persistence.Dto.EmployeePosition;
@@ -121,5 +122,8 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<ICreateRepository<Department, DepartmentCreate>, EfDepartmentRepository>();
         collection.AddScoped<IUpdateRepository<Department, DepartmentUpdate>, EfDepartmentRepository>();
         collection.AddScoped<IDeleteRepository<Department>, EfDepartmentRepository>();
+
+        // Auth
+        collection.AddScoped<ICreateRepository<Auth, AuthCreate>, EfAuthRepository>();
     }
 }

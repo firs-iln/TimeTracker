@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TimeTracker.Application.Abstractions.Persistence.Dto.User;
@@ -17,6 +18,7 @@ public class UserController(IMediator mediator) : ControllerBase
     [HttpGet("{username}")]
     [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [Authorize]
     public async Task<IActionResult> GetByUsernameAsync(string username)
     {
         try
@@ -33,6 +35,7 @@ public class UserController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [Authorize]
     public async Task<IActionResult> GetAsync(Guid id)
     {
         try
@@ -49,6 +52,7 @@ public class UserController(IMediator mediator) : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(User), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [Authorize]
     public async Task<IActionResult> CreateAsync([FromBody] UserCreate? user)
     {
         if (user == null)
@@ -71,6 +75,7 @@ public class UserController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(User), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [Authorize]
     public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UserUpdate? user)
     {
         if (user == null)
@@ -95,6 +100,7 @@ public class UserController(IMediator mediator) : ControllerBase
     
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<User>), (int)HttpStatusCode.OK)]
+    [Authorize]
     public async Task<IActionResult> GetAllAsync()
     {
         var users = await mediator.Send(new GetAllQuery<User>());

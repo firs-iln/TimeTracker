@@ -18,6 +18,11 @@ public class EfUserRepository(ApplicationDbContext dbContext)
         return entity != null ? MapBaseEntityToModel(entity) : null;
     }
 
+    public async Task<bool> IsCredentialsValid(string username, string password)
+    {
+        return await DbSet.AnyAsync(user => user.Username == username && user.HashedPassword == password);
+    }
+
     protected override UserModel MapEntityToModel(UserEntity entity)
     {
         UserModelRole role = Enum.Parse<UserModelRole>(entity.Role.ToString());

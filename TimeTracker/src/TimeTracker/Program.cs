@@ -19,6 +19,10 @@ builder.Configuration.AddUserSecrets<Program>();
 builder.Services.AddOptions<JsonSerializerSettings>();
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<JsonSerializerSettings>>().Value);
 
+var jwtOptionsSection = builder.Configuration.GetRequiredSection("Jwt");
+builder.Services.AddAuth(jwtOptionsSection);
+builder.Services.AddAuthorization();
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IAssemblyMarker).Assembly));
 
 builder.Services.AddSwaggerGen().AddEndpointsApiExplorer();
@@ -58,7 +62,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseRouting();
 
-// app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.UseLoggingMiddleware();
